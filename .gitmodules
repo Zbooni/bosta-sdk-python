@@ -1,3 +1,6 @@
 [submodule "spec"]
 	path = spec
 	url = git@github.com:Zbooni/bosta-api-spec.git
+[submodule "stone"]
+	path = stone
+	url = git@github.com:Zbooni/stone.git
