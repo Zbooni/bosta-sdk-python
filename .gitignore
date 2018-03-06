@@ -1,3 +1,8 @@
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Python package metadata
+*.egg-info/
+/build/
+/dist/
