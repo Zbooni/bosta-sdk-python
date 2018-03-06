@@ -337,7 +337,7 @@ class StoneToPythonPrimitiveSerializer(StoneSerializerBase):
             except AttributeError as exc:
                 raise bv.ValidationError(exc.args[0])
 
-            presence_key = '_%s_present' % field_name
+            presence_key = '_stone_%s_present' % field_name
 
             if field_value is not None \
                     and getattr(value, presence_key):

@@ -31,22 +31,22 @@ class Address(object):
     """
 
     __slots__ = [
-        '_geoLocation_value',
-        '_geoLocation_present',
-        '_firstLine_value',
-        '_firstLine_present',
-        '_secondLine_value',
-        '_secondLine_present',
-        '_floor_value',
-        '_floor_present',
-        '_apartment_value',
-        '_apartment_present',
-        '_zone_value',
-        '_zone_present',
-        '_district_value',
-        '_district_present',
-        '_city_value',
-        '_city_present',
+        '_stone_geoLocation_value',
+        '_stone_geoLocation_present',
+        '_stone_firstLine_value',
+        '_stone_firstLine_present',
+        '_stone_secondLine_value',
+        '_stone_secondLine_present',
+        '_stone_floor_value',
+        '_stone_floor_present',
+        '_stone_apartment_value',
+        '_stone_apartment_present',
+        '_stone_zone_value',
+        '_stone_zone_present',
+        '_stone_district_value',
+        '_stone_district_present',
+        '_stone_city_value',
+        '_stone_city_present',
     ]
 
     _has_required_fields = True
@@ -60,22 +60,22 @@ class Address(object):
                  apartment=None,
                  zone=None,
                  district=None):
-        self._geoLocation_value = None
-        self._geoLocation_present = False
-        self._firstLine_value = None
-        self._firstLine_present = False
-        self._secondLine_value = None
-        self._secondLine_present = False
-        self._floor_value = None
-        self._floor_present = False
-        self._apartment_value = None
-        self._apartment_present = False
-        self._zone_value = None
-        self._zone_present = False
-        self._district_value = None
-        self._district_present = False
-        self._city_value = None
-        self._city_present = False
+        self._stone_geoLocation_value = None
+        self._stone_geoLocation_present = False
+        self._stone_firstLine_value = None
+        self._stone_firstLine_present = False
+        self._stone_secondLine_value = None
+        self._stone_secondLine_present = False
+        self._stone_floor_value = None
+        self._stone_floor_present = False
+        self._stone_apartment_value = None
+        self._stone_apartment_present = False
+        self._stone_zone_value = None
+        self._stone_zone_present = False
+        self._stone_district_value = None
+        self._stone_district_present = False
+        self._stone_city_value = None
+        self._stone_city_present = False
         if geoLocation is not None:
             self.geoLocation = geoLocation
         if firstLine is not None:
@@ -100,8 +100,8 @@ class Address(object):
 
         :rtype: list of [float]
         """
-        if self._geoLocation_present:
-            return self._geoLocation_value
+        if self._stone_geoLocation_present:
+            return self._stone_geoLocation_value
         else:
             return None
 
@@ -110,14 +110,14 @@ class Address(object):
         if val is None:
             del self.geoLocation
             return
-        val = self._geoLocation_validator.validate(val)
-        self._geoLocation_value = val
-        self._geoLocation_present = True
+        val = self._stone_geoLocation_validator.validate(val)
+        self._stone_geoLocation_value = val
+        self._stone_geoLocation_present = True
 
     @geoLocation.deleter
     def geoLocation(self):
-        self._geoLocation_value = None
-        self._geoLocation_present = False
+        self._stone_geoLocation_value = None
+        self._stone_geoLocation_present = False
 
     @property
     def firstLine(self):
@@ -126,21 +126,21 @@ class Address(object):
 
         :rtype: str
         """
-        if self._firstLine_present:
-            return self._firstLine_value
+        if self._stone_firstLine_present:
+            return self._stone_firstLine_value
         else:
             raise AttributeError("missing required field 'firstLine'")
 
     @firstLine.setter
     def firstLine(self, val):
-        val = self._firstLine_validator.validate(val)
-        self._firstLine_value = val
-        self._firstLine_present = True
+        val = self._stone_firstLine_validator.validate(val)
+        self._stone_firstLine_value = val
+        self._stone_firstLine_present = True
 
     @firstLine.deleter
     def firstLine(self):
-        self._firstLine_value = None
-        self._firstLine_present = False
+        self._stone_firstLine_value = None
+        self._stone_firstLine_present = False
 
     @property
     def secondLine(self):
@@ -149,8 +149,8 @@ class Address(object):
 
         :rtype: str
         """
-        if self._secondLine_present:
-            return self._secondLine_value
+        if self._stone_secondLine_present:
+            return self._stone_secondLine_value
         else:
             return None
 
@@ -159,14 +159,14 @@ class Address(object):
         if val is None:
             del self.secondLine
             return
-        val = self._secondLine_validator.validate(val)
-        self._secondLine_value = val
-        self._secondLine_present = True
+        val = self._stone_secondLine_validator.validate(val)
+        self._stone_secondLine_value = val
+        self._stone_secondLine_present = True
 
     @secondLine.deleter
     def secondLine(self):
-        self._secondLine_value = None
-        self._secondLine_present = False
+        self._stone_secondLine_value = None
+        self._stone_secondLine_present = False
 
     @property
     def floor(self):
@@ -175,8 +175,8 @@ class Address(object):
 
         :rtype: long
         """
-        if self._floor_present:
-            return self._floor_value
+        if self._stone_floor_present:
+            return self._stone_floor_value
         else:
             return None
 
@@ -185,14 +185,14 @@ class Address(object):
         if val is None:
             del self.floor
             return
-        val = self._floor_validator.validate(val)
-        self._floor_value = val
-        self._floor_present = True
+        val = self._stone_floor_validator.validate(val)
+        self._stone_floor_value = val
+        self._stone_floor_present = True
 
     @floor.deleter
     def floor(self):
-        self._floor_value = None
-        self._floor_present = False
+        self._stone_floor_value = None
+        self._stone_floor_present = False
 
     @property
     def apartment(self):
@@ -201,8 +201,8 @@ class Address(object):
 
         :rtype: long
         """
-        if self._apartment_present:
-            return self._apartment_value
+        if self._stone_apartment_present:
+            return self._stone_apartment_value
         else:
             return None
 
@@ -211,14 +211,14 @@ class Address(object):
         if val is None:
             del self.apartment
             return
-        val = self._apartment_validator.validate(val)
-        self._apartment_value = val
-        self._apartment_present = True
+        val = self._stone_apartment_validator.validate(val)
+        self._stone_apartment_value = val
+        self._stone_apartment_present = True
 
     @apartment.deleter
     def apartment(self):
-        self._apartment_value = None
-        self._apartment_present = False
+        self._stone_apartment_value = None
+        self._stone_apartment_present = False
 
     @property
     def zone(self):
@@ -227,8 +227,8 @@ class Address(object):
 
         :rtype: str
         """
-        if self._zone_present:
-            return self._zone_value
+        if self._stone_zone_present:
+            return self._stone_zone_value
         else:
             return None
 
@@ -237,14 +237,14 @@ class Address(object):
         if val is None:
             del self.zone
             return
-        val = self._zone_validator.validate(val)
-        self._zone_value = val
-        self._zone_present = True
+        val = self._stone_zone_validator.validate(val)
+        self._stone_zone_value = val
+        self._stone_zone_present = True
 
     @zone.deleter
     def zone(self):
-        self._zone_value = None
-        self._zone_present = False
+        self._stone_zone_value = None
+        self._stone_zone_present = False
 
     @property
     def district(self):
@@ -253,8 +253,8 @@ class Address(object):
 
         :rtype: str
         """
-        if self._district_present:
-            return self._district_value
+        if self._stone_district_present:
+            return self._stone_district_value
         else:
             return None
 
@@ -263,14 +263,14 @@ class Address(object):
         if val is None:
             del self.district
             return
-        val = self._district_validator.validate(val)
-        self._district_value = val
-        self._district_present = True
+        val = self._stone_district_validator.validate(val)
+        self._stone_district_value = val
+        self._stone_district_present = True
 
     @district.deleter
     def district(self):
-        self._district_value = None
-        self._district_present = False
+        self._stone_district_value = None
+        self._stone_district_present = False
 
     @property
     def city(self):
@@ -279,32 +279,32 @@ class Address(object):
 
         :rtype: str
         """
-        if self._city_present:
-            return self._city_value
+        if self._stone_city_present:
+            return self._stone_city_value
         else:
             raise AttributeError("missing required field 'city'")
 
     @city.setter
     def city(self, val):
-        val = self._city_validator.validate(val)
-        self._city_value = val
-        self._city_present = True
+        val = self._stone_city_validator.validate(val)
+        self._stone_city_value = val
+        self._stone_city_present = True
 
     @city.deleter
     def city(self):
-        self._city_value = None
-        self._city_present = False
+        self._stone_city_value = None
+        self._stone_city_present = False
 
     def __repr__(self):
         return 'Address(firstLine={!r}, city={!r}, geoLocation={!r}, secondLine={!r}, floor={!r}, apartment={!r}, zone={!r}, district={!r})'.format(
-            self._firstLine_value,
-            self._city_value,
-            self._geoLocation_value,
-            self._secondLine_value,
-            self._floor_value,
-            self._apartment_value,
-            self._zone_value,
-            self._district_value,
+            self._stone_firstLine_value,
+            self._stone_city_value,
+            self._stone_geoLocation_value,
+            self._stone_secondLine_value,
+            self._stone_floor_value,
+            self._stone_apartment_value,
+            self._stone_zone_value,
+            self._stone_district_value,
         )
 
 Address_validator = bv.Struct(Address)
@@ -326,24 +326,24 @@ class CreateDeliveryArg(object):
     """
 
     __slots__ = [
-        '_receiver_value',
-        '_receiver_present',
-        '_pickupAddress_value',
-        '_pickupAddress_present',
-        '_dropOffAddress_value',
-        '_dropOffAddress_present',
-        '_notes_value',
-        '_notes_present',
-        '_cod_value',
-        '_cod_present',
-        '_type_value',
-        '_type_present',
-        '_isSameDay_value',
-        '_isSameDay_present',
-        '_businessReference_value',
-        '_businessReference_present',
-        '_webhookUrl_value',
-        '_webhookUrl_present',
+        '_stone_receiver_value',
+        '_stone_receiver_present',
+        '_stone_pickupAddress_value',
+        '_stone_pickupAddress_present',
+        '_stone_dropOffAddress_value',
+        '_stone_dropOffAddress_present',
+        '_stone_notes_value',
+        '_stone_notes_present',
+        '_stone_cod_value',
+        '_stone_cod_present',
+        '_stone_type_value',
+        '_stone_type_present',
+        '_stone_isSameDay_value',
+        '_stone_isSameDay_present',
+        '_stone_businessReference_value',
+        '_stone_businessReference_present',
+        '_stone_webhookUrl_value',
+        '_stone_webhookUrl_present',
     ]
 
     _has_required_fields = True
@@ -358,24 +358,24 @@ class CreateDeliveryArg(object):
                  isSameDay=None,
                  businessReference=None,
                  webhookUrl=None):
-        self._receiver_value = None
-        self._receiver_present = False
-        self._pickupAddress_value = None
-        self._pickupAddress_present = False
-        self._dropOffAddress_value = None
-        self._dropOffAddress_present = False
-        self._notes_value = None
-        self._notes_present = False
-        self._cod_value = None
-        self._cod_present = False
-        self._type_value = None
-        self._type_present = False
-        self._isSameDay_value = None
-        self._isSameDay_present = False
-        self._businessReference_value = None
-        self._businessReference_present = False
-        self._webhookUrl_value = None
-        self._webhookUrl_present = False
+        self._stone_receiver_value = None
+        self._stone_receiver_present = False
+        self._stone_pickupAddress_value = None
+        self._stone_pickupAddress_present = False
+        self._stone_dropOffAddress_value = None
+        self._stone_dropOffAddress_present = False
+        self._stone_notes_value = None
+        self._stone_notes_present = False
+        self._stone_cod_value = None
+        self._stone_cod_present = False
+        self._stone_type_value = None
+        self._stone_type_present = False
+        self._stone_isSameDay_value = None
+        self._stone_isSameDay_present = False
+        self._stone_businessReference_value = None
+        self._stone_businessReference_present = False
+        self._stone_webhookUrl_value = None
+        self._stone_webhookUrl_present = False
         if receiver is not None:
             self.receiver = receiver
         if pickupAddress is not None:
@@ -402,21 +402,21 @@ class CreateDeliveryArg(object):
 
         :rtype: Receiver
         """
-        if self._receiver_present:
-            return self._receiver_value
+        if self._stone_receiver_present:
+            return self._stone_receiver_value
         else:
             raise AttributeError("missing required field 'receiver'")
 
     @receiver.setter
     def receiver(self, val):
-        self._receiver_validator.validate_type_only(val)
-        self._receiver_value = val
-        self._receiver_present = True
+        self._stone_receiver_validator.validate_type_only(val)
+        self._stone_receiver_value = val
+        self._stone_receiver_present = True
 
     @receiver.deleter
     def receiver(self):
-        self._receiver_value = None
-        self._receiver_present = False
+        self._stone_receiver_value = None
+        self._stone_receiver_present = False
 
     @property
     def pickupAddress(self):
@@ -425,8 +425,8 @@ class CreateDeliveryArg(object):
 
         :rtype: Address
         """
-        if self._pickupAddress_present:
-            return self._pickupAddress_value
+        if self._stone_pickupAddress_present:
+            return self._stone_pickupAddress_value
         else:
             return None
 
@@ -435,14 +435,14 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.pickupAddress
             return
-        self._pickupAddress_validator.validate_type_only(val)
-        self._pickupAddress_value = val
-        self._pickupAddress_present = True
+        self._stone_pickupAddress_validator.validate_type_only(val)
+        self._stone_pickupAddress_value = val
+        self._stone_pickupAddress_present = True
 
     @pickupAddress.deleter
     def pickupAddress(self):
-        self._pickupAddress_value = None
-        self._pickupAddress_present = False
+        self._stone_pickupAddress_value = None
+        self._stone_pickupAddress_present = False
 
     @property
     def dropOffAddress(self):
@@ -451,8 +451,8 @@ class CreateDeliveryArg(object):
 
         :rtype: Address
         """
-        if self._dropOffAddress_present:
-            return self._dropOffAddress_value
+        if self._stone_dropOffAddress_present:
+            return self._stone_dropOffAddress_value
         else:
             return None
 
@@ -461,14 +461,14 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.dropOffAddress
             return
-        self._dropOffAddress_validator.validate_type_only(val)
-        self._dropOffAddress_value = val
-        self._dropOffAddress_present = True
+        self._stone_dropOffAddress_validator.validate_type_only(val)
+        self._stone_dropOffAddress_value = val
+        self._stone_dropOffAddress_present = True
 
     @dropOffAddress.deleter
     def dropOffAddress(self):
-        self._dropOffAddress_value = None
-        self._dropOffAddress_present = False
+        self._stone_dropOffAddress_value = None
+        self._stone_dropOffAddress_present = False
 
     @property
     def notes(self):
@@ -477,8 +477,8 @@ class CreateDeliveryArg(object):
 
         :rtype: str
         """
-        if self._notes_present:
-            return self._notes_value
+        if self._stone_notes_present:
+            return self._stone_notes_value
         else:
             return None
 
@@ -487,14 +487,14 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.notes
             return
-        val = self._notes_validator.validate(val)
-        self._notes_value = val
-        self._notes_present = True
+        val = self._stone_notes_validator.validate(val)
+        self._stone_notes_value = val
+        self._stone_notes_present = True
 
     @notes.deleter
     def notes(self):
-        self._notes_value = None
-        self._notes_present = False
+        self._stone_notes_value = None
+        self._stone_notes_present = False
 
     @property
     def cod(self):
@@ -503,8 +503,8 @@ class CreateDeliveryArg(object):
 
         :rtype: float
         """
-        if self._cod_present:
-            return self._cod_value
+        if self._stone_cod_present:
+            return self._stone_cod_value
         else:
             return None
 
@@ -513,14 +513,14 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.cod
             return
-        val = self._cod_validator.validate(val)
-        self._cod_value = val
-        self._cod_present = True
+        val = self._stone_cod_validator.validate(val)
+        self._stone_cod_value = val
+        self._stone_cod_present = True
 
     @cod.deleter
     def cod(self):
-        self._cod_value = None
-        self._cod_present = False
+        self._stone_cod_value = None
+        self._stone_cod_present = False
 
     @property
     def type(self):
@@ -529,21 +529,21 @@ class CreateDeliveryArg(object):
 
         :rtype: long
         """
-        if self._type_present:
-            return self._type_value
+        if self._stone_type_present:
+            return self._stone_type_value
         else:
             raise AttributeError("missing required field 'type'")
 
     @type.setter
     def type(self, val):
-        val = self._type_validator.validate(val)
-        self._type_value = val
-        self._type_present = True
+        val = self._stone_type_validator.validate(val)
+        self._stone_type_value = val
+        self._stone_type_present = True
 
     @type.deleter
     def type(self):
-        self._type_value = None
-        self._type_present = False
+        self._stone_type_value = None
+        self._stone_type_present = False
 
     @property
     def isSameDay(self):
@@ -552,8 +552,8 @@ class CreateDeliveryArg(object):
 
         :rtype: bool
         """
-        if self._isSameDay_present:
-            return self._isSameDay_value
+        if self._stone_isSameDay_present:
+            return self._stone_isSameDay_value
         else:
             return None
 
@@ -562,14 +562,14 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.isSameDay
             return
-        val = self._isSameDay_validator.validate(val)
-        self._isSameDay_value = val
-        self._isSameDay_present = True
+        val = self._stone_isSameDay_validator.validate(val)
+        self._stone_isSameDay_value = val
+        self._stone_isSameDay_present = True
 
     @isSameDay.deleter
     def isSameDay(self):
-        self._isSameDay_value = None
-        self._isSameDay_present = False
+        self._stone_isSameDay_value = None
+        self._stone_isSameDay_present = False
 
     @property
     def businessReference(self):
@@ -578,8 +578,8 @@ class CreateDeliveryArg(object):
 
         :rtype: str
         """
-        if self._businessReference_present:
-            return self._businessReference_value
+        if self._stone_businessReference_present:
+            return self._stone_businessReference_value
         else:
             return None
 
@@ -588,14 +588,14 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.businessReference
             return
-        val = self._businessReference_validator.validate(val)
-        self._businessReference_value = val
-        self._businessReference_present = True
+        val = self._stone_businessReference_validator.validate(val)
+        self._stone_businessReference_value = val
+        self._stone_businessReference_present = True
 
     @businessReference.deleter
     def businessReference(self):
-        self._businessReference_value = None
-        self._businessReference_present = False
+        self._stone_businessReference_value = None
+        self._stone_businessReference_present = False
 
     @property
     def webhookUrl(self):
@@ -604,8 +604,8 @@ class CreateDeliveryArg(object):
 
         :rtype: str
         """
-        if self._webhookUrl_present:
-            return self._webhookUrl_value
+        if self._stone_webhookUrl_present:
+            return self._stone_webhookUrl_value
         else:
             return None
 
@@ -614,26 +614,26 @@ class CreateDeliveryArg(object):
         if val is None:
             del self.webhookUrl
             return
-        val = self._webhookUrl_validator.validate(val)
-        self._webhookUrl_value = val
-        self._webhookUrl_present = True
+        val = self._stone_webhookUrl_validator.validate(val)
+        self._stone_webhookUrl_value = val
+        self._stone_webhookUrl_present = True
 
     @webhookUrl.deleter
     def webhookUrl(self):
-        self._webhookUrl_value = None
-        self._webhookUrl_present = False
+        self._stone_webhookUrl_value = None
+        self._stone_webhookUrl_present = False
 
     def __repr__(self):
         return 'CreateDeliveryArg(receiver={!r}, type={!r}, pickupAddress={!r}, dropOffAddress={!r}, notes={!r}, cod={!r}, isSameDay={!r}, businessReference={!r}, webhookUrl={!r})'.format(
-            self._receiver_value,
-            self._type_value,
-            self._pickupAddress_value,
-            self._dropOffAddress_value,
-            self._notes_value,
-            self._cod_value,
-            self._isSameDay_value,
-            self._businessReference_value,
-            self._webhookUrl_value,
+            self._stone_receiver_value,
+            self._stone_type_value,
+            self._stone_pickupAddress_value,
+            self._stone_dropOffAddress_value,
+            self._stone_notes_value,
+            self._stone_cod_value,
+            self._stone_isSameDay_value,
+            self._stone_businessReference_value,
+            self._stone_webhookUrl_value,
         )
 
 CreateDeliveryArg_validator = bv.Struct(CreateDeliveryArg)
@@ -646,12 +646,12 @@ class CreateDeliveryResult(object):
     """
 
     __slots__ = [
-        '__id_value',
-        '__id_present',
-        '_message_value',
-        '_message_present',
-        '_state_value',
-        '_state_present',
+        '_stone__id_value',
+        '_stone__id_present',
+        '_stone_message_value',
+        '_stone_message_present',
+        '_stone_state_value',
+        '_stone_state_present',
     ]
 
     _has_required_fields = True
@@ -660,12 +660,12 @@ class CreateDeliveryResult(object):
                  _id=None,
                  message=None,
                  state=None):
-        self.__id_value = None
-        self.__id_present = False
-        self._message_value = None
-        self._message_present = False
-        self._state_value = None
-        self._state_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
+        self._stone_state_value = None
+        self._stone_state_present = False
         if _id is not None:
             self._id = _id
         if message is not None:
@@ -680,21 +680,21 @@ class CreateDeliveryResult(object):
 
         :rtype: str
         """
-        if self.__id_present:
-            return self.__id_value
+        if self._stone__id_present:
+            return self._stone__id_value
         else:
             raise AttributeError("missing required field '_id'")
 
     @_id.setter
     def _id(self, val):
-        val = self.__id_validator.validate(val)
-        self.__id_value = val
-        self.__id_present = True
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
 
     @_id.deleter
     def _id(self):
-        self.__id_value = None
-        self.__id_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
 
     @property
     def message(self):
@@ -703,21 +703,21 @@ class CreateDeliveryResult(object):
 
         :rtype: str
         """
-        if self._message_present:
-            return self._message_value
+        if self._stone_message_present:
+            return self._stone_message_value
         else:
             raise AttributeError("missing required field 'message'")
 
     @message.setter
     def message(self, val):
-        val = self._message_validator.validate(val)
-        self._message_value = val
-        self._message_present = True
+        val = self._stone_message_validator.validate(val)
+        self._stone_message_value = val
+        self._stone_message_present = True
 
     @message.deleter
     def message(self):
-        self._message_value = None
-        self._message_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
 
     @property
     def state(self):
@@ -726,27 +726,27 @@ class CreateDeliveryResult(object):
 
         :rtype: State
         """
-        if self._state_present:
-            return self._state_value
+        if self._stone_state_present:
+            return self._stone_state_value
         else:
             raise AttributeError("missing required field 'state'")
 
     @state.setter
     def state(self, val):
-        self._state_validator.validate_type_only(val)
-        self._state_value = val
-        self._state_present = True
+        self._stone_state_validator.validate_type_only(val)
+        self._stone_state_value = val
+        self._stone_state_present = True
 
     @state.deleter
     def state(self):
-        self._state_value = None
-        self._state_present = False
+        self._stone_state_value = None
+        self._stone_state_present = False
 
     def __repr__(self):
         return 'CreateDeliveryResult(_id={!r}, message={!r}, state={!r})'.format(
-            self.__id_value,
-            self._message_value,
-            self._state_value,
+            self._stone__id_value,
+            self._stone_message_value,
+            self._stone_state_value,
         )
 
 CreateDeliveryResult_validator = bv.Struct(CreateDeliveryResult)
@@ -758,10 +758,10 @@ class DeleteDeliveryResult(object):
     """
 
     __slots__ = [
-        '__id_value',
-        '__id_present',
-        '_message_value',
-        '_message_present',
+        '_stone__id_value',
+        '_stone__id_present',
+        '_stone_message_value',
+        '_stone_message_present',
     ]
 
     _has_required_fields = True
@@ -769,10 +769,10 @@ class DeleteDeliveryResult(object):
     def __init__(self,
                  _id=None,
                  message=None):
-        self.__id_value = None
-        self.__id_present = False
-        self._message_value = None
-        self._message_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
         if _id is not None:
             self._id = _id
         if message is not None:
@@ -785,21 +785,21 @@ class DeleteDeliveryResult(object):
 
         :rtype: str
         """
-        if self.__id_present:
-            return self.__id_value
+        if self._stone__id_present:
+            return self._stone__id_value
         else:
             raise AttributeError("missing required field '_id'")
 
     @_id.setter
     def _id(self, val):
-        val = self.__id_validator.validate(val)
-        self.__id_value = val
-        self.__id_present = True
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
 
     @_id.deleter
     def _id(self):
-        self.__id_value = None
-        self.__id_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
 
     @property
     def message(self):
@@ -808,26 +808,26 @@ class DeleteDeliveryResult(object):
 
         :rtype: str
         """
-        if self._message_present:
-            return self._message_value
+        if self._stone_message_present:
+            return self._stone_message_value
         else:
             raise AttributeError("missing required field 'message'")
 
     @message.setter
     def message(self, val):
-        val = self._message_validator.validate(val)
-        self._message_value = val
-        self._message_present = True
+        val = self._stone_message_validator.validate(val)
+        self._stone_message_value = val
+        self._stone_message_present = True
 
     @message.deleter
     def message(self):
-        self._message_value = None
-        self._message_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
 
     def __repr__(self):
         return 'DeleteDeliveryResult(_id={!r}, message={!r})'.format(
-            self.__id_value,
-            self._message_value,
+            self._stone__id_value,
+            self._stone_message_value,
         )
 
 DeleteDeliveryResult_validator = bv.Struct(DeleteDeliveryResult)
@@ -848,22 +848,22 @@ class Delivery(object):
     """
 
     __slots__ = [
-        '_pickupAddress_value',
-        '_pickupAddress_present',
-        '_dropOffAddress_value',
-        '_dropOffAddress_present',
-        '_receiver_value',
-        '_receiver_present',
-        '_state_value',
-        '_state_present',
-        '_trackingNumber_value',
-        '_trackingNumber_present',
-        '_notes_value',
-        '_notes_present',
-        '_cod_value',
-        '_cod_present',
-        '_businessReference_value',
-        '_businessReference_present',
+        '_stone_pickupAddress_value',
+        '_stone_pickupAddress_present',
+        '_stone_dropOffAddress_value',
+        '_stone_dropOffAddress_present',
+        '_stone_receiver_value',
+        '_stone_receiver_present',
+        '_stone_state_value',
+        '_stone_state_present',
+        '_stone_trackingNumber_value',
+        '_stone_trackingNumber_present',
+        '_stone_notes_value',
+        '_stone_notes_present',
+        '_stone_cod_value',
+        '_stone_cod_present',
+        '_stone_businessReference_value',
+        '_stone_businessReference_present',
     ]
 
     _has_required_fields = True
@@ -877,22 +877,22 @@ class Delivery(object):
                  notes=None,
                  cod=None,
                  businessReference=None):
-        self._pickupAddress_value = None
-        self._pickupAddress_present = False
-        self._dropOffAddress_value = None
-        self._dropOffAddress_present = False
-        self._receiver_value = None
-        self._receiver_present = False
-        self._state_value = None
-        self._state_present = False
-        self._trackingNumber_value = None
-        self._trackingNumber_present = False
-        self._notes_value = None
-        self._notes_present = False
-        self._cod_value = None
-        self._cod_present = False
-        self._businessReference_value = None
-        self._businessReference_present = False
+        self._stone_pickupAddress_value = None
+        self._stone_pickupAddress_present = False
+        self._stone_dropOffAddress_value = None
+        self._stone_dropOffAddress_present = False
+        self._stone_receiver_value = None
+        self._stone_receiver_present = False
+        self._stone_state_value = None
+        self._stone_state_present = False
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
+        self._stone_notes_value = None
+        self._stone_notes_present = False
+        self._stone_cod_value = None
+        self._stone_cod_present = False
+        self._stone_businessReference_value = None
+        self._stone_businessReference_present = False
         if pickupAddress is not None:
             self.pickupAddress = pickupAddress
         if dropOffAddress is not None:
@@ -917,21 +917,21 @@ class Delivery(object):
 
         :rtype: Address
         """
-        if self._pickupAddress_present:
-            return self._pickupAddress_value
+        if self._stone_pickupAddress_present:
+            return self._stone_pickupAddress_value
         else:
             raise AttributeError("missing required field 'pickupAddress'")
 
     @pickupAddress.setter
     def pickupAddress(self, val):
-        self._pickupAddress_validator.validate_type_only(val)
-        self._pickupAddress_value = val
-        self._pickupAddress_present = True
+        self._stone_pickupAddress_validator.validate_type_only(val)
+        self._stone_pickupAddress_value = val
+        self._stone_pickupAddress_present = True
 
     @pickupAddress.deleter
     def pickupAddress(self):
-        self._pickupAddress_value = None
-        self._pickupAddress_present = False
+        self._stone_pickupAddress_value = None
+        self._stone_pickupAddress_present = False
 
     @property
     def dropOffAddress(self):
@@ -940,21 +940,21 @@ class Delivery(object):
 
         :rtype: Address
         """
-        if self._dropOffAddress_present:
-            return self._dropOffAddress_value
+        if self._stone_dropOffAddress_present:
+            return self._stone_dropOffAddress_value
         else:
             raise AttributeError("missing required field 'dropOffAddress'")
 
     @dropOffAddress.setter
     def dropOffAddress(self, val):
-        self._dropOffAddress_validator.validate_type_only(val)
-        self._dropOffAddress_value = val
-        self._dropOffAddress_present = True
+        self._stone_dropOffAddress_validator.validate_type_only(val)
+        self._stone_dropOffAddress_value = val
+        self._stone_dropOffAddress_present = True
 
     @dropOffAddress.deleter
     def dropOffAddress(self):
-        self._dropOffAddress_value = None
-        self._dropOffAddress_present = False
+        self._stone_dropOffAddress_value = None
+        self._stone_dropOffAddress_present = False
 
     @property
     def receiver(self):
@@ -963,21 +963,21 @@ class Delivery(object):
 
         :rtype: Receiver
         """
-        if self._receiver_present:
-            return self._receiver_value
+        if self._stone_receiver_present:
+            return self._stone_receiver_value
         else:
             raise AttributeError("missing required field 'receiver'")
 
     @receiver.setter
     def receiver(self, val):
-        self._receiver_validator.validate_type_only(val)
-        self._receiver_value = val
-        self._receiver_present = True
+        self._stone_receiver_validator.validate_type_only(val)
+        self._stone_receiver_value = val
+        self._stone_receiver_present = True
 
     @receiver.deleter
     def receiver(self):
-        self._receiver_value = None
-        self._receiver_present = False
+        self._stone_receiver_value = None
+        self._stone_receiver_present = False
 
     @property
     def state(self):
@@ -986,21 +986,21 @@ class Delivery(object):
 
         :rtype: State
         """
-        if self._state_present:
-            return self._state_value
+        if self._stone_state_present:
+            return self._stone_state_value
         else:
             raise AttributeError("missing required field 'state'")
 
     @state.setter
     def state(self, val):
-        self._state_validator.validate_type_only(val)
-        self._state_value = val
-        self._state_present = True
+        self._stone_state_validator.validate_type_only(val)
+        self._stone_state_value = val
+        self._stone_state_present = True
 
     @state.deleter
     def state(self):
-        self._state_value = None
-        self._state_present = False
+        self._stone_state_value = None
+        self._stone_state_present = False
 
     @property
     def trackingNumber(self):
@@ -1009,21 +1009,21 @@ class Delivery(object):
 
         :rtype: str
         """
-        if self._trackingNumber_present:
-            return self._trackingNumber_value
+        if self._stone_trackingNumber_present:
+            return self._stone_trackingNumber_value
         else:
             raise AttributeError("missing required field 'trackingNumber'")
 
     @trackingNumber.setter
     def trackingNumber(self, val):
-        val = self._trackingNumber_validator.validate(val)
-        self._trackingNumber_value = val
-        self._trackingNumber_present = True
+        val = self._stone_trackingNumber_validator.validate(val)
+        self._stone_trackingNumber_value = val
+        self._stone_trackingNumber_present = True
 
     @trackingNumber.deleter
     def trackingNumber(self):
-        self._trackingNumber_value = None
-        self._trackingNumber_present = False
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
 
     @property
     def notes(self):
@@ -1032,8 +1032,8 @@ class Delivery(object):
 
         :rtype: str
         """
-        if self._notes_present:
-            return self._notes_value
+        if self._stone_notes_present:
+            return self._stone_notes_value
         else:
             return None
 
@@ -1042,14 +1042,14 @@ class Delivery(object):
         if val is None:
             del self.notes
             return
-        val = self._notes_validator.validate(val)
-        self._notes_value = val
-        self._notes_present = True
+        val = self._stone_notes_validator.validate(val)
+        self._stone_notes_value = val
+        self._stone_notes_present = True
 
     @notes.deleter
     def notes(self):
-        self._notes_value = None
-        self._notes_present = False
+        self._stone_notes_value = None
+        self._stone_notes_present = False
 
     @property
     def cod(self):
@@ -1058,8 +1058,8 @@ class Delivery(object):
 
         :rtype: float
         """
-        if self._cod_present:
-            return self._cod_value
+        if self._stone_cod_present:
+            return self._stone_cod_value
         else:
             return None
 
@@ -1068,14 +1068,14 @@ class Delivery(object):
         if val is None:
             del self.cod
             return
-        val = self._cod_validator.validate(val)
-        self._cod_value = val
-        self._cod_present = True
+        val = self._stone_cod_validator.validate(val)
+        self._stone_cod_value = val
+        self._stone_cod_present = True
 
     @cod.deleter
     def cod(self):
-        self._cod_value = None
-        self._cod_present = False
+        self._stone_cod_value = None
+        self._stone_cod_present = False
 
     @property
     def businessReference(self):
@@ -1084,8 +1084,8 @@ class Delivery(object):
 
         :rtype: str
         """
-        if self._businessReference_present:
-            return self._businessReference_value
+        if self._stone_businessReference_present:
+            return self._stone_businessReference_value
         else:
             return None
 
@@ -1094,25 +1094,25 @@ class Delivery(object):
         if val is None:
             del self.businessReference
             return
-        val = self._businessReference_validator.validate(val)
-        self._businessReference_value = val
-        self._businessReference_present = True
+        val = self._stone_businessReference_validator.validate(val)
+        self._stone_businessReference_value = val
+        self._stone_businessReference_present = True
 
     @businessReference.deleter
     def businessReference(self):
-        self._businessReference_value = None
-        self._businessReference_present = False
+        self._stone_businessReference_value = None
+        self._stone_businessReference_present = False
 
     def __repr__(self):
         return 'Delivery(pickupAddress={!r}, dropOffAddress={!r}, receiver={!r}, state={!r}, trackingNumber={!r}, notes={!r}, cod={!r}, businessReference={!r})'.format(
-            self._pickupAddress_value,
-            self._dropOffAddress_value,
-            self._receiver_value,
-            self._state_value,
-            self._trackingNumber_value,
-            self._notes_value,
-            self._cod_value,
-            self._businessReference_value,
+            self._stone_pickupAddress_value,
+            self._stone_dropOffAddress_value,
+            self._stone_receiver_value,
+            self._stone_state_value,
+            self._stone_trackingNumber_value,
+            self._stone_notes_value,
+            self._stone_cod_value,
+            self._stone_businessReference_value,
         )
 
 Delivery_validator = bv.Struct(Delivery)
@@ -1126,10 +1126,10 @@ class Error(object):
     """
 
     __slots__ = [
-        '_code_value',
-        '_code_present',
-        '_message_value',
-        '_message_present',
+        '_stone_code_value',
+        '_stone_code_present',
+        '_stone_message_value',
+        '_stone_message_present',
     ]
 
     _has_required_fields = True
@@ -1137,10 +1137,10 @@ class Error(object):
     def __init__(self,
                  code=None,
                  message=None):
-        self._code_value = None
-        self._code_present = False
-        self._message_value = None
-        self._message_present = False
+        self._stone_code_value = None
+        self._stone_code_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
         if code is not None:
             self.code = code
         if message is not None:
@@ -1153,21 +1153,21 @@ class Error(object):
 
         :rtype: long
         """
-        if self._code_present:
-            return self._code_value
+        if self._stone_code_present:
+            return self._stone_code_value
         else:
             raise AttributeError("missing required field 'code'")
 
     @code.setter
     def code(self, val):
-        val = self._code_validator.validate(val)
-        self._code_value = val
-        self._code_present = True
+        val = self._stone_code_validator.validate(val)
+        self._stone_code_value = val
+        self._stone_code_present = True
 
     @code.deleter
     def code(self):
-        self._code_value = None
-        self._code_present = False
+        self._stone_code_value = None
+        self._stone_code_present = False
 
     @property
     def message(self):
@@ -1176,26 +1176,26 @@ class Error(object):
 
         :rtype: str
         """
-        if self._message_present:
-            return self._message_value
+        if self._stone_message_present:
+            return self._stone_message_value
         else:
             raise AttributeError("missing required field 'message'")
 
     @message.setter
     def message(self, val):
-        val = self._message_validator.validate(val)
-        self._message_value = val
-        self._message_present = True
+        val = self._stone_message_validator.validate(val)
+        self._stone_message_value = val
+        self._stone_message_present = True
 
     @message.deleter
     def message(self):
-        self._message_value = None
-        self._message_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
 
     def __repr__(self):
         return 'Error(code={!r}, message={!r})'.format(
-            self._code_value,
-            self._message_value,
+            self._stone_code_value,
+            self._stone_message_value,
         )
 
 Error_validator = bv.Struct(Error)
@@ -1206,16 +1206,16 @@ class GetDeliveryArg(object):
     """
 
     __slots__ = [
-        '__id_value',
-        '__id_present',
+        '_stone__id_value',
+        '_stone__id_present',
     ]
 
     _has_required_fields = True
 
     def __init__(self,
                  _id=None):
-        self.__id_value = None
-        self.__id_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
         if _id is not None:
             self._id = _id
 
@@ -1226,25 +1226,25 @@ class GetDeliveryArg(object):
 
         :rtype: str
         """
-        if self.__id_present:
-            return self.__id_value
+        if self._stone__id_present:
+            return self._stone__id_value
         else:
             raise AttributeError("missing required field '_id'")
 
     @_id.setter
     def _id(self, val):
-        val = self.__id_validator.validate(val)
-        self.__id_value = val
-        self.__id_present = True
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
 
     @_id.deleter
     def _id(self):
-        self.__id_value = None
-        self.__id_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
 
     def __repr__(self):
         return 'GetDeliveryArg(_id={!r})'.format(
-            self.__id_value,
+            self._stone__id_value,
         )
 
 GetDeliveryArg_validator = bv.Struct(GetDeliveryArg)
@@ -1255,16 +1255,16 @@ class GetDeliveryResult(object):
     """
 
     __slots__ = [
-        '_delivery_value',
-        '_delivery_present',
+        '_stone_delivery_value',
+        '_stone_delivery_present',
     ]
 
     _has_required_fields = True
 
     def __init__(self,
                  delivery=None):
-        self._delivery_value = None
-        self._delivery_present = False
+        self._stone_delivery_value = None
+        self._stone_delivery_present = False
         if delivery is not None:
             self.delivery = delivery
 
@@ -1275,25 +1275,25 @@ class GetDeliveryResult(object):
 
         :rtype: Delivery
         """
-        if self._delivery_present:
-            return self._delivery_value
+        if self._stone_delivery_present:
+            return self._stone_delivery_value
         else:
             raise AttributeError("missing required field 'delivery'")
 
     @delivery.setter
     def delivery(self, val):
-        self._delivery_validator.validate_type_only(val)
-        self._delivery_value = val
-        self._delivery_present = True
+        self._stone_delivery_validator.validate_type_only(val)
+        self._stone_delivery_value = val
+        self._stone_delivery_present = True
 
     @delivery.deleter
     def delivery(self):
-        self._delivery_value = None
-        self._delivery_present = False
+        self._stone_delivery_value = None
+        self._stone_delivery_present = False
 
     def __repr__(self):
         return 'GetDeliveryResult(delivery={!r})'.format(
-            self._delivery_value,
+            self._stone_delivery_value,
         )
 
 GetDeliveryResult_validator = bv.Struct(GetDeliveryResult)
@@ -1306,10 +1306,10 @@ class ListDeliveryArg(object):
     """
 
     __slots__ = [
-        '_page_value',
-        '_page_present',
-        '_perPage_value',
-        '_perPage_present',
+        '_stone_page_value',
+        '_stone_page_present',
+        '_stone_perPage_value',
+        '_stone_perPage_present',
     ]
 
     _has_required_fields = False
@@ -1317,10 +1317,10 @@ class ListDeliveryArg(object):
     def __init__(self,
                  page=None,
                  perPage=None):
-        self._page_value = None
-        self._page_present = False
-        self._perPage_value = None
-        self._perPage_present = False
+        self._stone_page_value = None
+        self._stone_page_present = False
+        self._stone_perPage_value = None
+        self._stone_perPage_present = False
         if page is not None:
             self.page = page
         if perPage is not None:
@@ -1333,8 +1333,8 @@ class ListDeliveryArg(object):
 
         :rtype: long
         """
-        if self._page_present:
-            return self._page_value
+        if self._stone_page_present:
+            return self._stone_page_value
         else:
             return None
 
@@ -1343,14 +1343,14 @@ class ListDeliveryArg(object):
         if val is None:
             del self.page
             return
-        val = self._page_validator.validate(val)
-        self._page_value = val
-        self._page_present = True
+        val = self._stone_page_validator.validate(val)
+        self._stone_page_value = val
+        self._stone_page_present = True
 
     @page.deleter
     def page(self):
-        self._page_value = None
-        self._page_present = False
+        self._stone_page_value = None
+        self._stone_page_present = False
 
     @property
     def perPage(self):
@@ -1359,8 +1359,8 @@ class ListDeliveryArg(object):
 
         :rtype: long
         """
-        if self._perPage_present:
-            return self._perPage_value
+        if self._stone_perPage_present:
+            return self._stone_perPage_value
         else:
             return None
 
@@ -1369,19 +1369,19 @@ class ListDeliveryArg(object):
         if val is None:
             del self.perPage
             return
-        val = self._perPage_validator.validate(val)
-        self._perPage_value = val
-        self._perPage_present = True
+        val = self._stone_perPage_validator.validate(val)
+        self._stone_perPage_value = val
+        self._stone_perPage_present = True
 
     @perPage.deleter
     def perPage(self):
-        self._perPage_value = None
-        self._perPage_present = False
+        self._stone_perPage_value = None
+        self._stone_perPage_present = False
 
     def __repr__(self):
         return 'ListDeliveryArg(page={!r}, perPage={!r})'.format(
-            self._page_value,
-            self._perPage_value,
+            self._stone_page_value,
+            self._stone_perPage_value,
         )
 
 ListDeliveryArg_validator = bv.Struct(ListDeliveryArg)
@@ -1392,16 +1392,16 @@ class ListDeliveryResult(object):
     """
 
     __slots__ = [
-        '_deliveries_value',
-        '_deliveries_present',
+        '_stone_deliveries_value',
+        '_stone_deliveries_present',
     ]
 
     _has_required_fields = True
 
     def __init__(self,
                  deliveries=None):
-        self._deliveries_value = None
-        self._deliveries_present = False
+        self._stone_deliveries_value = None
+        self._stone_deliveries_present = False
         if deliveries is not None:
             self.deliveries = deliveries
 
@@ -1412,25 +1412,25 @@ class ListDeliveryResult(object):
 
         :rtype: list of [Delivery]
         """
-        if self._deliveries_present:
-            return self._deliveries_value
+        if self._stone_deliveries_present:
+            return self._stone_deliveries_value
         else:
             raise AttributeError("missing required field 'deliveries'")
 
     @deliveries.setter
     def deliveries(self, val):
-        val = self._deliveries_validator.validate(val)
-        self._deliveries_value = val
-        self._deliveries_present = True
+        val = self._stone_deliveries_validator.validate(val)
+        self._stone_deliveries_value = val
+        self._stone_deliveries_present = True
 
     @deliveries.deleter
     def deliveries(self):
-        self._deliveries_value = None
-        self._deliveries_present = False
+        self._stone_deliveries_value = None
+        self._stone_deliveries_present = False
 
     def __repr__(self):
         return 'ListDeliveryResult(deliveries={!r})'.format(
-            self._deliveries_value,
+            self._stone_deliveries_value,
         )
 
 ListDeliveryResult_validator = bv.Struct(ListDeliveryResult)
@@ -1446,14 +1446,14 @@ class Receiver(object):
     """
 
     __slots__ = [
-        '_firstName_value',
-        '_firstName_present',
-        '_lastName_value',
-        '_lastName_present',
-        '_phone_value',
-        '_phone_present',
-        '_email_value',
-        '_email_present',
+        '_stone_firstName_value',
+        '_stone_firstName_present',
+        '_stone_lastName_value',
+        '_stone_lastName_present',
+        '_stone_phone_value',
+        '_stone_phone_present',
+        '_stone_email_value',
+        '_stone_email_present',
     ]
 
     _has_required_fields = True
@@ -1463,14 +1463,14 @@ class Receiver(object):
                  lastName=None,
                  phone=None,
                  email=None):
-        self._firstName_value = None
-        self._firstName_present = False
-        self._lastName_value = None
-        self._lastName_present = False
-        self._phone_value = None
-        self._phone_present = False
-        self._email_value = None
-        self._email_present = False
+        self._stone_firstName_value = None
+        self._stone_firstName_present = False
+        self._stone_lastName_value = None
+        self._stone_lastName_present = False
+        self._stone_phone_value = None
+        self._stone_phone_present = False
+        self._stone_email_value = None
+        self._stone_email_present = False
         if firstName is not None:
             self.firstName = firstName
         if lastName is not None:
@@ -1487,21 +1487,21 @@ class Receiver(object):
 
         :rtype: str
         """
-        if self._firstName_present:
-            return self._firstName_value
+        if self._stone_firstName_present:
+            return self._stone_firstName_value
         else:
             raise AttributeError("missing required field 'firstName'")
 
     @firstName.setter
     def firstName(self, val):
-        val = self._firstName_validator.validate(val)
-        self._firstName_value = val
-        self._firstName_present = True
+        val = self._stone_firstName_validator.validate(val)
+        self._stone_firstName_value = val
+        self._stone_firstName_present = True
 
     @firstName.deleter
     def firstName(self):
-        self._firstName_value = None
-        self._firstName_present = False
+        self._stone_firstName_value = None
+        self._stone_firstName_present = False
 
     @property
     def lastName(self):
@@ -1510,21 +1510,21 @@ class Receiver(object):
 
         :rtype: str
         """
-        if self._lastName_present:
-            return self._lastName_value
+        if self._stone_lastName_present:
+            return self._stone_lastName_value
         else:
             raise AttributeError("missing required field 'lastName'")
 
     @lastName.setter
     def lastName(self, val):
-        val = self._lastName_validator.validate(val)
-        self._lastName_value = val
-        self._lastName_present = True
+        val = self._stone_lastName_validator.validate(val)
+        self._stone_lastName_value = val
+        self._stone_lastName_present = True
 
     @lastName.deleter
     def lastName(self):
-        self._lastName_value = None
-        self._lastName_present = False
+        self._stone_lastName_value = None
+        self._stone_lastName_present = False
 
     @property
     def phone(self):
@@ -1533,21 +1533,21 @@ class Receiver(object):
 
         :rtype: str
         """
-        if self._phone_present:
-            return self._phone_value
+        if self._stone_phone_present:
+            return self._stone_phone_value
         else:
             raise AttributeError("missing required field 'phone'")
 
     @phone.setter
     def phone(self, val):
-        val = self._phone_validator.validate(val)
-        self._phone_value = val
-        self._phone_present = True
+        val = self._stone_phone_validator.validate(val)
+        self._stone_phone_value = val
+        self._stone_phone_present = True
 
     @phone.deleter
     def phone(self):
-        self._phone_value = None
-        self._phone_present = False
+        self._stone_phone_value = None
+        self._stone_phone_present = False
 
     @property
     def email(self):
@@ -1556,8 +1556,8 @@ class Receiver(object):
 
         :rtype: str
         """
-        if self._email_present:
-            return self._email_value
+        if self._stone_email_present:
+            return self._stone_email_value
         else:
             return None
 
@@ -1566,21 +1566,21 @@ class Receiver(object):
         if val is None:
             del self.email
             return
-        val = self._email_validator.validate(val)
-        self._email_value = val
-        self._email_present = True
+        val = self._stone_email_validator.validate(val)
+        self._stone_email_value = val
+        self._stone_email_present = True
 
     @email.deleter
     def email(self):
-        self._email_value = None
-        self._email_present = False
+        self._stone_email_value = None
+        self._stone_email_present = False
 
     def __repr__(self):
         return 'Receiver(firstName={!r}, lastName={!r}, phone={!r}, email={!r})'.format(
-            self._firstName_value,
-            self._lastName_value,
-            self._phone_value,
-            self._email_value,
+            self._stone_firstName_value,
+            self._stone_lastName_value,
+            self._stone_phone_value,
+            self._stone_email_value,
         )
 
 Receiver_validator = bv.Struct(Receiver)
@@ -1591,16 +1591,16 @@ class RequestError(object):
     """
 
     __slots__ = [
-        '_errors_value',
-        '_errors_present',
+        '_stone_errors_value',
+        '_stone_errors_present',
     ]
 
     _has_required_fields = True
 
     def __init__(self,
                  errors=None):
-        self._errors_value = None
-        self._errors_present = False
+        self._stone_errors_value = None
+        self._stone_errors_present = False
         if errors is not None:
             self.errors = errors
 
@@ -1611,25 +1611,25 @@ class RequestError(object):
 
         :rtype: list of [Error]
         """
-        if self._errors_present:
-            return self._errors_value
+        if self._stone_errors_present:
+            return self._stone_errors_value
         else:
             raise AttributeError("missing required field 'errors'")
 
     @errors.setter
     def errors(self, val):
-        val = self._errors_validator.validate(val)
-        self._errors_value = val
-        self._errors_present = True
+        val = self._stone_errors_validator.validate(val)
+        self._stone_errors_value = val
+        self._stone_errors_present = True
 
     @errors.deleter
     def errors(self):
-        self._errors_value = None
-        self._errors_present = False
+        self._stone_errors_value = None
+        self._stone_errors_present = False
 
     def __repr__(self):
         return 'RequestError(errors={!r})'.format(
-            self._errors_value,
+            self._stone_errors_value,
         )
 
 RequestError_validator = bv.Struct(RequestError)
@@ -1643,10 +1643,10 @@ class State(object):
     """
 
     __slots__ = [
-        '_value_value',
-        '_value_present',
-        '_code_value',
-        '_code_present',
+        '_stone_value_value',
+        '_stone_value_present',
+        '_stone_code_value',
+        '_stone_code_present',
     ]
 
     _has_required_fields = True
@@ -1654,10 +1654,10 @@ class State(object):
     def __init__(self,
                  value=None,
                  code=None):
-        self._value_value = None
-        self._value_present = False
-        self._code_value = None
-        self._code_present = False
+        self._stone_value_value = None
+        self._stone_value_present = False
+        self._stone_code_value = None
+        self._stone_code_present = False
         if value is not None:
             self.value = value
         if code is not None:
@@ -1670,21 +1670,21 @@ class State(object):
 
         :rtype: str
         """
-        if self._value_present:
-            return self._value_value
+        if self._stone_value_present:
+            return self._stone_value_value
         else:
             raise AttributeError("missing required field 'value'")
 
     @value.setter
     def value(self, val):
-        val = self._value_validator.validate(val)
-        self._value_value = val
-        self._value_present = True
+        val = self._stone_value_validator.validate(val)
+        self._stone_value_value = val
+        self._stone_value_present = True
 
     @value.deleter
     def value(self):
-        self._value_value = None
-        self._value_present = False
+        self._stone_value_value = None
+        self._stone_value_present = False
 
     @property
     def code(self):
@@ -1693,26 +1693,26 @@ class State(object):
 
         :rtype: long
         """
-        if self._code_present:
-            return self._code_value
+        if self._stone_code_present:
+            return self._stone_code_value
         else:
             raise AttributeError("missing required field 'code'")
 
     @code.setter
     def code(self, val):
-        val = self._code_validator.validate(val)
-        self._code_value = val
-        self._code_present = True
+        val = self._stone_code_validator.validate(val)
+        self._stone_code_value = val
+        self._stone_code_present = True
 
     @code.deleter
     def code(self):
-        self._code_value = None
-        self._code_present = False
+        self._stone_code_value = None
+        self._stone_code_present = False
 
     def __repr__(self):
         return 'State(value={!r}, code={!r})'.format(
-            self._value_value,
-            self._code_value,
+            self._stone_value_value,
+            self._stone_code_value,
         )
 
 State_validator = bv.Struct(State)
@@ -1726,10 +1726,10 @@ class Type(object):
     """
 
     __slots__ = [
-        '_value_value',
-        '_value_present',
-        '_code_value',
-        '_code_present',
+        '_stone_value_value',
+        '_stone_value_present',
+        '_stone_code_value',
+        '_stone_code_present',
     ]
 
     _has_required_fields = True
@@ -1737,10 +1737,10 @@ class Type(object):
     def __init__(self,
                  value=None,
                  code=None):
-        self._value_value = None
-        self._value_present = False
-        self._code_value = None
-        self._code_present = False
+        self._stone_value_value = None
+        self._stone_value_present = False
+        self._stone_code_value = None
+        self._stone_code_present = False
         if value is not None:
             self.value = value
         if code is not None:
@@ -1753,21 +1753,21 @@ class Type(object):
 
         :rtype: str
         """
-        if self._value_present:
-            return self._value_value
+        if self._stone_value_present:
+            return self._stone_value_value
         else:
             raise AttributeError("missing required field 'value'")
 
     @value.setter
     def value(self, val):
-        val = self._value_validator.validate(val)
-        self._value_value = val
-        self._value_present = True
+        val = self._stone_value_validator.validate(val)
+        self._stone_value_value = val
+        self._stone_value_present = True
 
     @value.deleter
     def value(self):
-        self._value_value = None
-        self._value_present = False
+        self._stone_value_value = None
+        self._stone_value_present = False
 
     @property
     def code(self):
@@ -1776,26 +1776,26 @@ class Type(object):
 
         :rtype: long
         """
-        if self._code_present:
-            return self._code_value
+        if self._stone_code_present:
+            return self._stone_code_value
         else:
             raise AttributeError("missing required field 'code'")
 
     @code.setter
     def code(self, val):
-        val = self._code_validator.validate(val)
-        self._code_value = val
-        self._code_present = True
+        val = self._stone_code_validator.validate(val)
+        self._stone_code_value = val
+        self._stone_code_present = True
 
     @code.deleter
     def code(self):
-        self._code_value = None
-        self._code_present = False
+        self._stone_code_value = None
+        self._stone_code_present = False
 
     def __repr__(self):
         return 'Type(value={!r}, code={!r})'.format(
-            self._value_value,
-            self._code_value,
+            self._stone_value_value,
+            self._stone_code_value,
         )
 
 Type_validator = bv.Struct(Type)
@@ -1814,20 +1814,20 @@ class UpdateDeliveryArg(object):
     """
 
     __slots__ = [
-        '_receiver_value',
-        '_receiver_present',
-        '_pickupAddress_value',
-        '_pickupAddress_present',
-        '_dropOffAddress_value',
-        '_dropOffAddress_present',
-        '_notes_value',
-        '_notes_present',
-        '_cod_value',
-        '_cod_present',
-        '_businessReference_value',
-        '_businessReference_present',
-        '_webhookUrl_value',
-        '_webhookUrl_present',
+        '_stone_receiver_value',
+        '_stone_receiver_present',
+        '_stone_pickupAddress_value',
+        '_stone_pickupAddress_present',
+        '_stone_dropOffAddress_value',
+        '_stone_dropOffAddress_present',
+        '_stone_notes_value',
+        '_stone_notes_present',
+        '_stone_cod_value',
+        '_stone_cod_present',
+        '_stone_businessReference_value',
+        '_stone_businessReference_present',
+        '_stone_webhookUrl_value',
+        '_stone_webhookUrl_present',
     ]
 
     _has_required_fields = False
@@ -1840,20 +1840,20 @@ class UpdateDeliveryArg(object):
                  cod=None,
                  businessReference=None,
                  webhookUrl=None):
-        self._receiver_value = None
-        self._receiver_present = False
-        self._pickupAddress_value = None
-        self._pickupAddress_present = False
-        self._dropOffAddress_value = None
-        self._dropOffAddress_present = False
-        self._notes_value = None
-        self._notes_present = False
-        self._cod_value = None
-        self._cod_present = False
-        self._businessReference_value = None
-        self._businessReference_present = False
-        self._webhookUrl_value = None
-        self._webhookUrl_present = False
+        self._stone_receiver_value = None
+        self._stone_receiver_present = False
+        self._stone_pickupAddress_value = None
+        self._stone_pickupAddress_present = False
+        self._stone_dropOffAddress_value = None
+        self._stone_dropOffAddress_present = False
+        self._stone_notes_value = None
+        self._stone_notes_present = False
+        self._stone_cod_value = None
+        self._stone_cod_present = False
+        self._stone_businessReference_value = None
+        self._stone_businessReference_present = False
+        self._stone_webhookUrl_value = None
+        self._stone_webhookUrl_present = False
         if receiver is not None:
             self.receiver = receiver
         if pickupAddress is not None:
@@ -1876,8 +1876,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: Receiver
         """
-        if self._receiver_present:
-            return self._receiver_value
+        if self._stone_receiver_present:
+            return self._stone_receiver_value
         else:
             return None
 
@@ -1886,14 +1886,14 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.receiver
             return
-        self._receiver_validator.validate_type_only(val)
-        self._receiver_value = val
-        self._receiver_present = True
+        self._stone_receiver_validator.validate_type_only(val)
+        self._stone_receiver_value = val
+        self._stone_receiver_present = True
 
     @receiver.deleter
     def receiver(self):
-        self._receiver_value = None
-        self._receiver_present = False
+        self._stone_receiver_value = None
+        self._stone_receiver_present = False
 
     @property
     def pickupAddress(self):
@@ -1902,8 +1902,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: Address
         """
-        if self._pickupAddress_present:
-            return self._pickupAddress_value
+        if self._stone_pickupAddress_present:
+            return self._stone_pickupAddress_value
         else:
             return None
 
@@ -1912,14 +1912,14 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.pickupAddress
             return
-        self._pickupAddress_validator.validate_type_only(val)
-        self._pickupAddress_value = val
-        self._pickupAddress_present = True
+        self._stone_pickupAddress_validator.validate_type_only(val)
+        self._stone_pickupAddress_value = val
+        self._stone_pickupAddress_present = True
 
     @pickupAddress.deleter
     def pickupAddress(self):
-        self._pickupAddress_value = None
-        self._pickupAddress_present = False
+        self._stone_pickupAddress_value = None
+        self._stone_pickupAddress_present = False
 
     @property
     def dropOffAddress(self):
@@ -1928,8 +1928,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: Address
         """
-        if self._dropOffAddress_present:
-            return self._dropOffAddress_value
+        if self._stone_dropOffAddress_present:
+            return self._stone_dropOffAddress_value
         else:
             return None
 
@@ -1938,14 +1938,14 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.dropOffAddress
             return
-        self._dropOffAddress_validator.validate_type_only(val)
-        self._dropOffAddress_value = val
-        self._dropOffAddress_present = True
+        self._stone_dropOffAddress_validator.validate_type_only(val)
+        self._stone_dropOffAddress_value = val
+        self._stone_dropOffAddress_present = True
 
     @dropOffAddress.deleter
     def dropOffAddress(self):
-        self._dropOffAddress_value = None
-        self._dropOffAddress_present = False
+        self._stone_dropOffAddress_value = None
+        self._stone_dropOffAddress_present = False
 
     @property
     def notes(self):
@@ -1954,8 +1954,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: str
         """
-        if self._notes_present:
-            return self._notes_value
+        if self._stone_notes_present:
+            return self._stone_notes_value
         else:
             return None
 
@@ -1964,14 +1964,14 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.notes
             return
-        val = self._notes_validator.validate(val)
-        self._notes_value = val
-        self._notes_present = True
+        val = self._stone_notes_validator.validate(val)
+        self._stone_notes_value = val
+        self._stone_notes_present = True
 
     @notes.deleter
     def notes(self):
-        self._notes_value = None
-        self._notes_present = False
+        self._stone_notes_value = None
+        self._stone_notes_present = False
 
     @property
     def cod(self):
@@ -1980,8 +1980,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: long
         """
-        if self._cod_present:
-            return self._cod_value
+        if self._stone_cod_present:
+            return self._stone_cod_value
         else:
             return None
 
@@ -1990,14 +1990,14 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.cod
             return
-        val = self._cod_validator.validate(val)
-        self._cod_value = val
-        self._cod_present = True
+        val = self._stone_cod_validator.validate(val)
+        self._stone_cod_value = val
+        self._stone_cod_present = True
 
     @cod.deleter
     def cod(self):
-        self._cod_value = None
-        self._cod_present = False
+        self._stone_cod_value = None
+        self._stone_cod_present = False
 
     @property
     def businessReference(self):
@@ -2006,8 +2006,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: str
         """
-        if self._businessReference_present:
-            return self._businessReference_value
+        if self._stone_businessReference_present:
+            return self._stone_businessReference_value
         else:
             return None
 
@@ -2016,14 +2016,14 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.businessReference
             return
-        val = self._businessReference_validator.validate(val)
-        self._businessReference_value = val
-        self._businessReference_present = True
+        val = self._stone_businessReference_validator.validate(val)
+        self._stone_businessReference_value = val
+        self._stone_businessReference_present = True
 
     @businessReference.deleter
     def businessReference(self):
-        self._businessReference_value = None
-        self._businessReference_present = False
+        self._stone_businessReference_value = None
+        self._stone_businessReference_present = False
 
     @property
     def webhookUrl(self):
@@ -2032,8 +2032,8 @@ class UpdateDeliveryArg(object):
 
         :rtype: str
         """
-        if self._webhookUrl_present:
-            return self._webhookUrl_value
+        if self._stone_webhookUrl_present:
+            return self._stone_webhookUrl_value
         else:
             return None
 
@@ -2042,24 +2042,24 @@ class UpdateDeliveryArg(object):
         if val is None:
             del self.webhookUrl
             return
-        val = self._webhookUrl_validator.validate(val)
-        self._webhookUrl_value = val
-        self._webhookUrl_present = True
+        val = self._stone_webhookUrl_validator.validate(val)
+        self._stone_webhookUrl_value = val
+        self._stone_webhookUrl_present = True
 
     @webhookUrl.deleter
     def webhookUrl(self):
-        self._webhookUrl_value = None
-        self._webhookUrl_present = False
+        self._stone_webhookUrl_value = None
+        self._stone_webhookUrl_present = False
 
     def __repr__(self):
         return 'UpdateDeliveryArg(receiver={!r}, pickupAddress={!r}, dropOffAddress={!r}, notes={!r}, cod={!r}, businessReference={!r}, webhookUrl={!r})'.format(
-            self._receiver_value,
-            self._pickupAddress_value,
-            self._dropOffAddress_value,
-            self._notes_value,
-            self._cod_value,
-            self._businessReference_value,
-            self._webhookUrl_value,
+            self._stone_receiver_value,
+            self._stone_pickupAddress_value,
+            self._stone_dropOffAddress_value,
+            self._stone_notes_value,
+            self._stone_cod_value,
+            self._stone_businessReference_value,
+            self._stone_webhookUrl_value,
         )
 
 UpdateDeliveryArg_validator = bv.Struct(UpdateDeliveryArg)
@@ -2071,10 +2071,10 @@ class UpdateDeliveryResult(object):
     """
 
     __slots__ = [
-        '__id_value',
-        '__id_present',
-        '_message_value',
-        '_message_present',
+        '_stone__id_value',
+        '_stone__id_present',
+        '_stone_message_value',
+        '_stone_message_present',
     ]
 
     _has_required_fields = True
@@ -2082,10 +2082,10 @@ class UpdateDeliveryResult(object):
     def __init__(self,
                  _id=None,
                  message=None):
-        self.__id_value = None
-        self.__id_present = False
-        self._message_value = None
-        self._message_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
         if _id is not None:
             self._id = _id
         if message is not None:
@@ -2098,21 +2098,21 @@ class UpdateDeliveryResult(object):
 
         :rtype: str
         """
-        if self.__id_present:
-            return self.__id_value
+        if self._stone__id_present:
+            return self._stone__id_value
         else:
             raise AttributeError("missing required field '_id'")
 
     @_id.setter
     def _id(self, val):
-        val = self.__id_validator.validate(val)
-        self.__id_value = val
-        self.__id_present = True
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
 
     @_id.deleter
     def _id(self):
-        self.__id_value = None
-        self.__id_present = False
+        self._stone__id_value = None
+        self._stone__id_present = False
 
     @property
     def message(self):
@@ -2121,38 +2121,38 @@ class UpdateDeliveryResult(object):
 
         :rtype: str
         """
-        if self._message_present:
-            return self._message_value
+        if self._stone_message_present:
+            return self._stone_message_value
         else:
             raise AttributeError("missing required field 'message'")
 
     @message.setter
     def message(self, val):
-        val = self._message_validator.validate(val)
-        self._message_value = val
-        self._message_present = True
+        val = self._stone_message_validator.validate(val)
+        self._stone_message_value = val
+        self._stone_message_present = True
 
     @message.deleter
     def message(self):
-        self._message_value = None
-        self._message_present = False
+        self._stone_message_value = None
+        self._stone_message_present = False
 
     def __repr__(self):
         return 'UpdateDeliveryResult(_id={!r}, message={!r})'.format(
-            self.__id_value,
-            self._message_value,
+            self._stone__id_value,
+            self._stone_message_value,
         )
 
 UpdateDeliveryResult_validator = bv.Struct(UpdateDeliveryResult)
 
-Address._geoLocation_validator = bv.Nullable(bv.List(bv.Float32(), max_items=2))
-Address._firstLine_validator = bv.String()
-Address._secondLine_validator = bv.Nullable(bv.String())
-Address._floor_validator = bv.Nullable(bv.Int32())
-Address._apartment_validator = bv.Nullable(bv.Int32())
-Address._zone_validator = bv.Nullable(bv.String())
-Address._district_validator = bv.Nullable(bv.String())
-Address._city_validator = bv.String(pattern='^EG-0(1|2)$')
+Address._stone_geoLocation_validator = bv.Nullable(bv.List(bv.Float32(), max_items=2))
+Address._stone_firstLine_validator = bv.String()
+Address._stone_secondLine_validator = bv.Nullable(bv.String())
+Address._stone_floor_validator = bv.Nullable(bv.Int32())
+Address._stone_apartment_validator = bv.Nullable(bv.Int32())
+Address._stone_zone_validator = bv.Nullable(bv.String())
+Address._stone_district_validator = bv.Nullable(bv.String())
+Address._stone_city_validator = bv.String(pattern='^EG-0(1|2)$')
 Address._all_field_names_ = set([
     'geoLocation',
     'firstLine',
@@ -2164,25 +2164,25 @@ Address._all_field_names_ = set([
     'city',
 ])
 Address._all_fields_ = [
-    ('geoLocation', Address._geoLocation_validator),
-    ('firstLine', Address._firstLine_validator),
-    ('secondLine', Address._secondLine_validator),
-    ('floor', Address._floor_validator),
-    ('apartment', Address._apartment_validator),
-    ('zone', Address._zone_validator),
-    ('district', Address._district_validator),
-    ('city', Address._city_validator),
+    ('geoLocation', Address._stone_geoLocation_validator),
+    ('firstLine', Address._stone_firstLine_validator),
+    ('secondLine', Address._stone_secondLine_validator),
+    ('floor', Address._stone_floor_validator),
+    ('apartment', Address._stone_apartment_validator),
+    ('zone', Address._stone_zone_validator),
+    ('district', Address._stone_district_validator),
+    ('city', Address._stone_city_validator),
 ]
 
-CreateDeliveryArg._receiver_validator = Receiver_validator
-CreateDeliveryArg._pickupAddress_validator = bv.Nullable(Address_validator)
-CreateDeliveryArg._dropOffAddress_validator = bv.Nullable(Address_validator)
-CreateDeliveryArg._notes_validator = bv.Nullable(bv.String())
-CreateDeliveryArg._cod_validator = bv.Nullable(bv.Float32())
-CreateDeliveryArg._type_validator = bv.Int32()
-CreateDeliveryArg._isSameDay_validator = bv.Nullable(bv.Boolean())
-CreateDeliveryArg._businessReference_validator = bv.Nullable(bv.String())
-CreateDeliveryArg._webhookUrl_validator = bv.Nullable(bv.String())
+CreateDeliveryArg._stone_receiver_validator = Receiver_validator
+CreateDeliveryArg._stone_pickupAddress_validator = bv.Nullable(Address_validator)
+CreateDeliveryArg._stone_dropOffAddress_validator = bv.Nullable(Address_validator)
+CreateDeliveryArg._stone_notes_validator = bv.Nullable(bv.String())
+CreateDeliveryArg._stone_cod_validator = bv.Nullable(bv.Float32())
+CreateDeliveryArg._stone_type_validator = bv.Int32()
+CreateDeliveryArg._stone_isSameDay_validator = bv.Nullable(bv.Boolean())
+CreateDeliveryArg._stone_businessReference_validator = bv.Nullable(bv.String())
+CreateDeliveryArg._stone_webhookUrl_validator = bv.Nullable(bv.String())
 CreateDeliveryArg._all_field_names_ = set([
     'receiver',
     'pickupAddress',
@@ -2195,50 +2195,50 @@ CreateDeliveryArg._all_field_names_ = set([
     'webhookUrl',
 ])
 CreateDeliveryArg._all_fields_ = [
-    ('receiver', CreateDeliveryArg._receiver_validator),
-    ('pickupAddress', CreateDeliveryArg._pickupAddress_validator),
-    ('dropOffAddress', CreateDeliveryArg._dropOffAddress_validator),
-    ('notes', CreateDeliveryArg._notes_validator),
-    ('cod', CreateDeliveryArg._cod_validator),
-    ('type', CreateDeliveryArg._type_validator),
-    ('isSameDay', CreateDeliveryArg._isSameDay_validator),
-    ('businessReference', CreateDeliveryArg._businessReference_validator),
-    ('webhookUrl', CreateDeliveryArg._webhookUrl_validator),
+    ('receiver', CreateDeliveryArg._stone_receiver_validator),
+    ('pickupAddress', CreateDeliveryArg._stone_pickupAddress_validator),
+    ('dropOffAddress', CreateDeliveryArg._stone_dropOffAddress_validator),
+    ('notes', CreateDeliveryArg._stone_notes_validator),
+    ('cod', CreateDeliveryArg._stone_cod_validator),
+    ('type', CreateDeliveryArg._stone_type_validator),
+    ('isSameDay', CreateDeliveryArg._stone_isSameDay_validator),
+    ('businessReference', CreateDeliveryArg._stone_businessReference_validator),
+    ('webhookUrl', CreateDeliveryArg._stone_webhookUrl_validator),
 ]
 
-CreateDeliveryResult.__id_validator = bv.String()
-CreateDeliveryResult._message_validator = bv.String()
-CreateDeliveryResult._state_validator = State_validator
+CreateDeliveryResult._stone__id_validator = bv.String()
+CreateDeliveryResult._stone_message_validator = bv.String()
+CreateDeliveryResult._stone_state_validator = State_validator
 CreateDeliveryResult._all_field_names_ = set([
     '_id',
     'message',
     'state',
 ])
 CreateDeliveryResult._all_fields_ = [
-    ('_id', CreateDeliveryResult.__id_validator),
-    ('message', CreateDeliveryResult._message_validator),
-    ('state', CreateDeliveryResult._state_validator),
+    ('_id', CreateDeliveryResult._stone__id_validator),
+    ('message', CreateDeliveryResult._stone_message_validator),
+    ('state', CreateDeliveryResult._stone_state_validator),
 ]
 
-DeleteDeliveryResult.__id_validator = bv.String()
-DeleteDeliveryResult._message_validator = bv.String()
+DeleteDeliveryResult._stone__id_validator = bv.String()
+DeleteDeliveryResult._stone_message_validator = bv.String()
 DeleteDeliveryResult._all_field_names_ = set([
     '_id',
     'message',
 ])
 DeleteDeliveryResult._all_fields_ = [
-    ('_id', DeleteDeliveryResult.__id_validator),
-    ('message', DeleteDeliveryResult._message_validator),
+    ('_id', DeleteDeliveryResult._stone__id_validator),
+    ('message', DeleteDeliveryResult._stone_message_validator),
 ]
 
-Delivery._pickupAddress_validator = Address_validator
-Delivery._dropOffAddress_validator = Address_validator
-Delivery._receiver_validator = Receiver_validator
-Delivery._state_validator = State_validator
-Delivery._trackingNumber_validator = bv.String()
-Delivery._notes_validator = bv.Nullable(bv.String())
-Delivery._cod_validator = bv.Nullable(bv.Float32())
-Delivery._businessReference_validator = bv.Nullable(bv.String())
+Delivery._stone_pickupAddress_validator = Address_validator
+Delivery._stone_dropOffAddress_validator = Address_validator
+Delivery._stone_receiver_validator = Receiver_validator
+Delivery._stone_state_validator = State_validator
+Delivery._stone_trackingNumber_validator = bv.String()
+Delivery._stone_notes_validator = bv.Nullable(bv.String())
+Delivery._stone_cod_validator = bv.Nullable(bv.Float32())
+Delivery._stone_businessReference_validator = bv.Nullable(bv.String())
 Delivery._all_field_names_ = set([
     'pickupAddress',
     'dropOffAddress',
@@ -2250,54 +2250,54 @@ Delivery._all_field_names_ = set([
     'businessReference',
 ])
 Delivery._all_fields_ = [
-    ('pickupAddress', Delivery._pickupAddress_validator),
-    ('dropOffAddress', Delivery._dropOffAddress_validator),
-    ('receiver', Delivery._receiver_validator),
-    ('state', Delivery._state_validator),
-    ('trackingNumber', Delivery._trackingNumber_validator),
-    ('notes', Delivery._notes_validator),
-    ('cod', Delivery._cod_validator),
-    ('businessReference', Delivery._businessReference_validator),
+    ('pickupAddress', Delivery._stone_pickupAddress_validator),
+    ('dropOffAddress', Delivery._stone_dropOffAddress_validator),
+    ('receiver', Delivery._stone_receiver_validator),
+    ('state', Delivery._stone_state_validator),
+    ('trackingNumber', Delivery._stone_trackingNumber_validator),
+    ('notes', Delivery._stone_notes_validator),
+    ('cod', Delivery._stone_cod_validator),
+    ('businessReference', Delivery._stone_businessReference_validator),
 ]
 
-Error._code_validator = bv.Int32()
-Error._message_validator = bv.String()
+Error._stone_code_validator = bv.Int32()
+Error._stone_message_validator = bv.String()
 Error._all_field_names_ = set([
     'code',
     'message',
 ])
 Error._all_fields_ = [
-    ('code', Error._code_validator),
-    ('message', Error._message_validator),
+    ('code', Error._stone_code_validator),
+    ('message', Error._stone_message_validator),
 ]
 
-GetDeliveryArg.__id_validator = bv.String()
+GetDeliveryArg._stone__id_validator = bv.String()
 GetDeliveryArg._all_field_names_ = set(['_id'])
-GetDeliveryArg._all_fields_ = [('_id', GetDeliveryArg.__id_validator)]
+GetDeliveryArg._all_fields_ = [('_id', GetDeliveryArg._stone__id_validator)]
 
-GetDeliveryResult._delivery_validator = Delivery_validator
+GetDeliveryResult._stone_delivery_validator = Delivery_validator
 GetDeliveryResult._all_field_names_ = set(['delivery'])
-GetDeliveryResult._all_fields_ = [('delivery', GetDeliveryResult._delivery_validator)]
+GetDeliveryResult._all_fields_ = [('delivery', GetDeliveryResult._stone_delivery_validator)]
 
-ListDeliveryArg._page_validator = bv.Nullable(bv.Int32())
-ListDeliveryArg._perPage_validator = bv.Nullable(bv.Int32())
+ListDeliveryArg._stone_page_validator = bv.Nullable(bv.Int32())
+ListDeliveryArg._stone_perPage_validator = bv.Nullable(bv.Int32())
 ListDeliveryArg._all_field_names_ = set([
     'page',
     'perPage',
 ])
 ListDeliveryArg._all_fields_ = [
-    ('page', ListDeliveryArg._page_validator),
-    ('perPage', ListDeliveryArg._perPage_validator),
+    ('page', ListDeliveryArg._stone_page_validator),
+    ('perPage', ListDeliveryArg._stone_perPage_validator),
 ]
 
-ListDeliveryResult._deliveries_validator = bv.List(Delivery_validator)
+ListDeliveryResult._stone_deliveries_validator = bv.List(Delivery_validator)
 ListDeliveryResult._all_field_names_ = set(['deliveries'])
-ListDeliveryResult._all_fields_ = [('deliveries', ListDeliveryResult._deliveries_validator)]
+ListDeliveryResult._all_fields_ = [('deliveries', ListDeliveryResult._stone_deliveries_validator)]
 
-Receiver._firstName_validator = bv.String()
-Receiver._lastName_validator = bv.String()
-Receiver._phone_validator = bv.String()
-Receiver._email_validator = bv.Nullable(bv.String())
+Receiver._stone_firstName_validator = bv.String()
+Receiver._stone_lastName_validator = bv.String()
+Receiver._stone_phone_validator = bv.String()
+Receiver._stone_email_validator = bv.Nullable(bv.String())
 Receiver._all_field_names_ = set([
     'firstName',
     'lastName',
@@ -2305,45 +2305,45 @@ Receiver._all_field_names_ = set([
     'email',
 ])
 Receiver._all_fields_ = [
-    ('firstName', Receiver._firstName_validator),
-    ('lastName', Receiver._lastName_validator),
-    ('phone', Receiver._phone_validator),
-    ('email', Receiver._email_validator),
+    ('firstName', Receiver._stone_firstName_validator),
+    ('lastName', Receiver._stone_lastName_validator),
+    ('phone', Receiver._stone_phone_validator),
+    ('email', Receiver._stone_email_validator),
 ]
 
-RequestError._errors_validator = bv.List(Error_validator)
+RequestError._stone_errors_validator = bv.List(Error_validator)
 RequestError._all_field_names_ = set(['errors'])
-RequestError._all_fields_ = [('errors', RequestError._errors_validator)]
+RequestError._all_fields_ = [('errors', RequestError._stone_errors_validator)]
 
-State._value_validator = bv.String()
-State._code_validator = bv.Int32()
+State._stone_value_validator = bv.String()
+State._stone_code_validator = bv.Int32()
 State._all_field_names_ = set([
     'value',
     'code',
 ])
 State._all_fields_ = [
-    ('value', State._value_validator),
-    ('code', State._code_validator),
+    ('value', State._stone_value_validator),
+    ('code', State._stone_code_validator),
 ]
 
-Type._value_validator = bv.String()
-Type._code_validator = bv.Int32()
+Type._stone_value_validator = bv.String()
+Type._stone_code_validator = bv.Int32()
 Type._all_field_names_ = set([
     'value',
     'code',
 ])
 Type._all_fields_ = [
-    ('value', Type._value_validator),
-    ('code', Type._code_validator),
+    ('value', Type._stone_value_validator),
+    ('code', Type._stone_code_validator),
 ]
 
-UpdateDeliveryArg._receiver_validator = bv.Nullable(Receiver_validator)
-UpdateDeliveryArg._pickupAddress_validator = bv.Nullable(Address_validator)
-UpdateDeliveryArg._dropOffAddress_validator = bv.Nullable(Address_validator)
-UpdateDeliveryArg._notes_validator = bv.Nullable(bv.String())
-UpdateDeliveryArg._cod_validator = bv.Nullable(bv.Int32())
-UpdateDeliveryArg._businessReference_validator = bv.Nullable(bv.String())
-UpdateDeliveryArg._webhookUrl_validator = bv.Nullable(bv.String())
+UpdateDeliveryArg._stone_receiver_validator = bv.Nullable(Receiver_validator)
+UpdateDeliveryArg._stone_pickupAddress_validator = bv.Nullable(Address_validator)
+UpdateDeliveryArg._stone_dropOffAddress_validator = bv.Nullable(Address_validator)
+UpdateDeliveryArg._stone_notes_validator = bv.Nullable(bv.String())
+UpdateDeliveryArg._stone_cod_validator = bv.Nullable(bv.Int32())
+UpdateDeliveryArg._stone_businessReference_validator = bv.Nullable(bv.String())
+UpdateDeliveryArg._stone_webhookUrl_validator = bv.Nullable(bv.String())
 UpdateDeliveryArg._all_field_names_ = set([
     'receiver',
     'pickupAddress',
@@ -2354,24 +2354,24 @@ UpdateDeliveryArg._all_field_names_ = set([
     'webhookUrl',
 ])
 UpdateDeliveryArg._all_fields_ = [
-    ('receiver', UpdateDeliveryArg._receiver_validator),
-    ('pickupAddress', UpdateDeliveryArg._pickupAddress_validator),
-    ('dropOffAddress', UpdateDeliveryArg._dropOffAddress_validator),
-    ('notes', UpdateDeliveryArg._notes_validator),
-    ('cod', UpdateDeliveryArg._cod_validator),
-    ('businessReference', UpdateDeliveryArg._businessReference_validator),
-    ('webhookUrl', UpdateDeliveryArg._webhookUrl_validator),
+    ('receiver', UpdateDeliveryArg._stone_receiver_validator),
+    ('pickupAddress', UpdateDeliveryArg._stone_pickupAddress_validator),
+    ('dropOffAddress', UpdateDeliveryArg._stone_dropOffAddress_validator),
+    ('notes', UpdateDeliveryArg._stone_notes_validator),
+    ('cod', UpdateDeliveryArg._stone_cod_validator),
+    ('businessReference', UpdateDeliveryArg._stone_businessReference_validator),
+    ('webhookUrl', UpdateDeliveryArg._stone_webhookUrl_validator),
 ]
 
-UpdateDeliveryResult.__id_validator = bv.String()
-UpdateDeliveryResult._message_validator = bv.String()
+UpdateDeliveryResult._stone__id_validator = bv.String()
+UpdateDeliveryResult._stone_message_validator = bv.String()
 UpdateDeliveryResult._all_field_names_ = set([
     '_id',
     'message',
 ])
 UpdateDeliveryResult._all_fields_ = [
-    ('_id', UpdateDeliveryResult.__id_validator),
-    ('message', UpdateDeliveryResult._message_validator),
+    ('_id', UpdateDeliveryResult._stone__id_validator),
+    ('message', UpdateDeliveryResult._stone_message_validator),
 ]
 
 create = bb.Route(
