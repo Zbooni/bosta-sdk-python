@@ -70,17 +70,19 @@ class BostaBase(object):
         )
         return r
 
-    def deliveries_delete(self):
+    def deliveries_delete(self,
+                          _id):
         """
         Cancel the delivery with the given ID.
 
+        :param str _id: ID of the delivery to delete.
         :rtype: :class:`bosta.deliveries.DeleteDeliveryResult`
         :raises: :class:`.exceptions.ApiError`
 
         If this raises, ApiError will contain:
             :class:`bosta.deliveries.RequestError`
         """
-        arg = None
+        arg = deliveries.DeleteDeliveryArg(_id)
         r = self.request(
             deliveries.delete,
             'deliveries',
@@ -136,6 +138,7 @@ class BostaBase(object):
         return r
 
     def deliveries_update(self,
+                          _id,
                           receiver=None,
                           pickupAddress=None,
                           dropOffAddress=None,
@@ -147,6 +150,7 @@ class BostaBase(object):
         Modify one or more delivery fields in an existing delivery with the
         given ID.
 
+        :param str _id: ID of the delivery to update.
         :param Nullable receiver: Delivery receiver details object.
         :param Nullable pickupAddress: Delivery pickup address.
         :param Nullable dropOffAddress: Delivery destination address.
@@ -163,7 +167,8 @@ class BostaBase(object):
         If this raises, ApiError will contain:
             :class:`bosta.deliveries.RequestError`
         """
-        arg = deliveries.UpdateDeliveryArg(receiver,
+        arg = deliveries.UpdateDeliveryArg(_id,
+                                           receiver,
                                            pickupAddress,
                                            dropOffAddress,
                                            notes,

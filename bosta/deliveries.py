@@ -16,23 +16,19 @@ except (ImportError, SystemError, ValueError):
     import stone_validators as bv
     import stone_base as bb
 
-class Address(object):
+class BaseAddress(object):
     """
-    An address where a delivery can be picked up or dropped off.
+    Struct with common address fields.
 
-    :ivar geoLocation: Latitude and Longitude.
     :ivar firstLine: Human readable text address.
     :ivar secondLine: Address notes.
     :ivar floor: Floor number.
     :ivar apartment: Apartment number.
     :ivar zone: Zone where the address is located.
     :ivar district: District where the address is located.
-    :ivar city: City code where the address belongs to.
     """
 
     __slots__ = [
-        '_stone_geoLocation_value',
-        '_stone_geoLocation_present',
         '_stone_firstLine_value',
         '_stone_firstLine_present',
         '_stone_secondLine_value',
@@ -45,23 +41,17 @@ class Address(object):
         '_stone_zone_present',
         '_stone_district_value',
         '_stone_district_present',
-        '_stone_city_value',
-        '_stone_city_present',
     ]
 
     _has_required_fields = True
 
     def __init__(self,
                  firstLine=None,
-                 city=None,
-                 geoLocation=None,
                  secondLine=None,
                  floor=None,
                  apartment=None,
                  zone=None,
                  district=None):
-        self._stone_geoLocation_value = None
-        self._stone_geoLocation_present = False
         self._stone_firstLine_value = None
         self._stone_firstLine_present = False
         self._stone_secondLine_value = None
@@ -74,10 +64,6 @@ class Address(object):
         self._stone_zone_present = False
         self._stone_district_value = None
         self._stone_district_present = False
-        self._stone_city_value = None
-        self._stone_city_present = False
-        if geoLocation is not None:
-            self.geoLocation = geoLocation
         if firstLine is not None:
             self.firstLine = firstLine
         if secondLine is not None:
@@ -90,34 +76,6 @@ class Address(object):
             self.zone = zone
         if district is not None:
             self.district = district
-        if city is not None:
-            self.city = city
-
-    @property
-    def geoLocation(self):
-        """
-        Latitude and Longitude.
-
-        :rtype: list of [float]
-        """
-        if self._stone_geoLocation_present:
-            return self._stone_geoLocation_value
-        else:
-            return None
-
-    @geoLocation.setter
-    def geoLocation(self, val):
-        if val is None:
-            del self.geoLocation
-            return
-        val = self._stone_geoLocation_validator.validate(val)
-        self._stone_geoLocation_value = val
-        self._stone_geoLocation_present = True
-
-    @geoLocation.deleter
-    def geoLocation(self):
-        self._stone_geoLocation_value = None
-        self._stone_geoLocation_present = False
 
     @property
     def firstLine(self):
@@ -272,6 +230,85 @@ class Address(object):
         self._stone_district_value = None
         self._stone_district_present = False
 
+    def __repr__(self):
+        return 'BaseAddress(firstLine={!r}, secondLine={!r}, floor={!r}, apartment={!r}, zone={!r}, district={!r})'.format(
+            self._stone_firstLine_value,
+            self._stone_secondLine_value,
+            self._stone_floor_value,
+            self._stone_apartment_value,
+            self._stone_zone_value,
+            self._stone_district_value,
+        )
+
+BaseAddress_validator = bv.Struct(BaseAddress)
+
+class Address(BaseAddress):
+    """
+    Address for requests.
+
+    :ivar geoLocation: Latitude and Longitude.
+    :ivar city: City code where the address belongs to.
+    """
+
+    __slots__ = [
+        '_stone_geoLocation_value',
+        '_stone_geoLocation_present',
+        '_stone_city_value',
+        '_stone_city_present',
+    ]
+
+    _has_required_fields = True
+
+    def __init__(self,
+                 firstLine=None,
+                 city=None,
+                 secondLine=None,
+                 floor=None,
+                 apartment=None,
+                 zone=None,
+                 district=None,
+                 geoLocation=None):
+        super(Address, self).__init__(firstLine,
+                                      secondLine,
+                                      floor,
+                                      apartment,
+                                      zone,
+                                      district)
+        self._stone_geoLocation_value = None
+        self._stone_geoLocation_present = False
+        self._stone_city_value = None
+        self._stone_city_present = False
+        if geoLocation is not None:
+            self.geoLocation = geoLocation
+        if city is not None:
+            self.city = city
+
+    @property
+    def geoLocation(self):
+        """
+        Latitude and Longitude.
+
+        :rtype: list of [float]
+        """
+        if self._stone_geoLocation_present:
+            return self._stone_geoLocation_value
+        else:
+            return None
+
+    @geoLocation.setter
+    def geoLocation(self, val):
+        if val is None:
+            del self.geoLocation
+            return
+        val = self._stone_geoLocation_validator.validate(val)
+        self._stone_geoLocation_value = val
+        self._stone_geoLocation_present = True
+
+    @geoLocation.deleter
+    def geoLocation(self):
+        self._stone_geoLocation_value = None
+        self._stone_geoLocation_present = False
+
     @property
     def city(self):
         """
@@ -296,18 +333,101 @@ class Address(object):
         self._stone_city_present = False
 
     def __repr__(self):
-        return 'Address(firstLine={!r}, city={!r}, geoLocation={!r}, secondLine={!r}, floor={!r}, apartment={!r}, zone={!r}, district={!r})'.format(
+        return 'Address(firstLine={!r}, city={!r}, secondLine={!r}, floor={!r}, apartment={!r}, zone={!r}, district={!r}, geoLocation={!r})'.format(
             self._stone_firstLine_value,
             self._stone_city_value,
-            self._stone_geoLocation_value,
             self._stone_secondLine_value,
             self._stone_floor_value,
             self._stone_apartment_value,
             self._stone_zone_value,
             self._stone_district_value,
+            self._stone_geoLocation_value,
         )
 
 Address_validator = bv.Struct(Address)
+
+class City(object):
+    """
+    A city.
+
+    :ivar _id: ID of the city.
+    :ivar name: Name of the city.
+    """
+
+    __slots__ = [
+        '_stone__id_value',
+        '_stone__id_present',
+        '_stone_name_value',
+        '_stone_name_present',
+    ]
+
+    _has_required_fields = True
+
+    def __init__(self,
+                 _id=None,
+                 name=None):
+        self._stone__id_value = None
+        self._stone__id_present = False
+        self._stone_name_value = None
+        self._stone_name_present = False
+        if _id is not None:
+            self._id = _id
+        if name is not None:
+            self.name = name
+
+    @property
+    def _id(self):
+        """
+        ID of the city.
+
+        :rtype: str
+        """
+        if self._stone__id_present:
+            return self._stone__id_value
+        else:
+            raise AttributeError("missing required field '_id'")
+
+    @_id.setter
+    def _id(self, val):
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
+
+    @_id.deleter
+    def _id(self):
+        self._stone__id_value = None
+        self._stone__id_present = False
+
+    @property
+    def name(self):
+        """
+        Name of the city.
+
+        :rtype: str
+        """
+        if self._stone_name_present:
+            return self._stone_name_value
+        else:
+            raise AttributeError("missing required field 'name'")
+
+    @name.setter
+    def name(self, val):
+        val = self._stone_name_validator.validate(val)
+        self._stone_name_value = val
+        self._stone_name_present = True
+
+    @name.deleter
+    def name(self):
+        self._stone_name_value = None
+        self._stone_name_present = False
+
+    def __repr__(self):
+        return 'City(_id={!r}, name={!r})'.format(
+            self._stone__id_value,
+            self._stone_name_value,
+        )
+
+City_validator = bv.Struct(City)
 
 class CreateDeliveryArg(object):
     """
@@ -751,6 +871,55 @@ class CreateDeliveryResult(object):
 
 CreateDeliveryResult_validator = bv.Struct(CreateDeliveryResult)
 
+class DeleteDeliveryArg(object):
+    """
+    :ivar _id: ID of the delivery to delete.
+    """
+
+    __slots__ = [
+        '_stone__id_value',
+        '_stone__id_present',
+    ]
+
+    _has_required_fields = True
+
+    def __init__(self,
+                 _id=None):
+        self._stone__id_value = None
+        self._stone__id_present = False
+        if _id is not None:
+            self._id = _id
+
+    @property
+    def _id(self):
+        """
+        ID of the delivery to delete.
+
+        :rtype: str
+        """
+        if self._stone__id_present:
+            return self._stone__id_value
+        else:
+            raise AttributeError("missing required field '_id'")
+
+    @_id.setter
+    def _id(self, val):
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
+
+    @_id.deleter
+    def _id(self):
+        self._stone__id_value = None
+        self._stone__id_present = False
+
+    def __repr__(self):
+        return 'DeleteDeliveryArg(_id={!r})'.format(
+            self._stone__id_value,
+        )
+
+DeleteDeliveryArg_validator = bv.Struct(DeleteDeliveryArg)
+
 class DeleteDeliveryResult(object):
     """
     :ivar _id: ID of the deleted delivery.
@@ -836,6 +1005,7 @@ class Delivery(object):
     """
     Delivery details.
 
+    :ivar _id: ID of the delivery.
     :ivar pickupAddress: Address details where delivery is picked up from.
     :ivar dropOffAddress: Address details where delivery is delivered to.
     :ivar receiver: Delivery receiver details.
@@ -845,9 +1015,12 @@ class Delivery(object):
         delivery.
     :ivar cod: Cash on delivery amount if required.
     :ivar businessReference: Reference number from the client system.
+    :ivar type: The service type of the delivery.
     """
 
     __slots__ = [
+        '_stone__id_value',
+        '_stone__id_present',
         '_stone_pickupAddress_value',
         '_stone_pickupAddress_present',
         '_stone_dropOffAddress_value',
@@ -864,11 +1037,14 @@ class Delivery(object):
         '_stone_cod_present',
         '_stone_businessReference_value',
         '_stone_businessReference_present',
+        '_stone_type_value',
+        '_stone_type_present',
     ]
 
     _has_required_fields = True
 
     def __init__(self,
+                 _id=None,
                  pickupAddress=None,
                  dropOffAddress=None,
                  receiver=None,
@@ -876,7 +1052,10 @@ class Delivery(object):
                  trackingNumber=None,
                  notes=None,
                  cod=None,
-                 businessReference=None):
+                 businessReference=None,
+                 type=None):
+        self._stone__id_value = None
+        self._stone__id_present = False
         self._stone_pickupAddress_value = None
         self._stone_pickupAddress_present = False
         self._stone_dropOffAddress_value = None
@@ -893,6 +1072,10 @@ class Delivery(object):
         self._stone_cod_present = False
         self._stone_businessReference_value = None
         self._stone_businessReference_present = False
+        self._stone_type_value = None
+        self._stone_type_present = False
+        if _id is not None:
+            self._id = _id
         if pickupAddress is not None:
             self.pickupAddress = pickupAddress
         if dropOffAddress is not None:
@@ -909,13 +1092,38 @@ class Delivery(object):
             self.cod = cod
         if businessReference is not None:
             self.businessReference = businessReference
+        if type is not None:
+            self.type = type
+
+    @property
+    def _id(self):
+        """
+        ID of the delivery.
+
+        :rtype: str
+        """
+        if self._stone__id_present:
+            return self._stone__id_value
+        else:
+            raise AttributeError("missing required field '_id'")
+
+    @_id.setter
+    def _id(self, val):
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
+
+    @_id.deleter
+    def _id(self):
+        self._stone__id_value = None
+        self._stone__id_present = False
 
     @property
     def pickupAddress(self):
         """
         Address details where delivery is picked up from.
 
-        :rtype: Address
+        :rtype: ResultAddress
         """
         if self._stone_pickupAddress_present:
             return self._stone_pickupAddress_value
@@ -938,7 +1146,7 @@ class Delivery(object):
         """
         Address details where delivery is delivered to.
 
-        :rtype: Address
+        :rtype: ResultAddress
         """
         if self._stone_dropOffAddress_present:
             return self._stone_dropOffAddress_value
@@ -1103,8 +1311,35 @@ class Delivery(object):
         self._stone_businessReference_value = None
         self._stone_businessReference_present = False
 
+    @property
+    def type(self):
+        """
+        The service type of the delivery.
+
+        :rtype: Type
+        """
+        if self._stone_type_present:
+            return self._stone_type_value
+        else:
+            return None
+
+    @type.setter
+    def type(self, val):
+        if val is None:
+            del self.type
+            return
+        self._stone_type_validator.validate_type_only(val)
+        self._stone_type_value = val
+        self._stone_type_present = True
+
+    @type.deleter
+    def type(self):
+        self._stone_type_value = None
+        self._stone_type_present = False
+
     def __repr__(self):
-        return 'Delivery(pickupAddress={!r}, dropOffAddress={!r}, receiver={!r}, state={!r}, trackingNumber={!r}, notes={!r}, cod={!r}, businessReference={!r})'.format(
+        return 'Delivery(_id={!r}, pickupAddress={!r}, dropOffAddress={!r}, receiver={!r}, state={!r}, trackingNumber={!r}, notes={!r}, cod={!r}, businessReference={!r}, type={!r})'.format(
+            self._stone__id_value,
             self._stone_pickupAddress_value,
             self._stone_dropOffAddress_value,
             self._stone_receiver_value,
@@ -1113,6 +1348,7 @@ class Delivery(object):
             self._stone_notes_value,
             self._stone_cod_value,
             self._stone_businessReference_value,
+            self._stone_type_value,
         )
 
 Delivery_validator = bv.Struct(Delivery)
@@ -1199,6 +1435,89 @@ class Error(object):
         )
 
 Error_validator = bv.Struct(Error)
+
+class GeoLocation(object):
+    """
+    Coordinates to a point on Earth.
+
+    :ivar latitude: North-south position.
+    :ivar longitude: East-west position.
+    """
+
+    __slots__ = [
+        '_stone_latitude_value',
+        '_stone_latitude_present',
+        '_stone_longitude_value',
+        '_stone_longitude_present',
+    ]
+
+    _has_required_fields = True
+
+    def __init__(self,
+                 latitude=None,
+                 longitude=None):
+        self._stone_latitude_value = None
+        self._stone_latitude_present = False
+        self._stone_longitude_value = None
+        self._stone_longitude_present = False
+        if latitude is not None:
+            self.latitude = latitude
+        if longitude is not None:
+            self.longitude = longitude
+
+    @property
+    def latitude(self):
+        """
+        North-south position.
+
+        :rtype: float
+        """
+        if self._stone_latitude_present:
+            return self._stone_latitude_value
+        else:
+            raise AttributeError("missing required field 'latitude'")
+
+    @latitude.setter
+    def latitude(self, val):
+        val = self._stone_latitude_validator.validate(val)
+        self._stone_latitude_value = val
+        self._stone_latitude_present = True
+
+    @latitude.deleter
+    def latitude(self):
+        self._stone_latitude_value = None
+        self._stone_latitude_present = False
+
+    @property
+    def longitude(self):
+        """
+        East-west position.
+
+        :rtype: float
+        """
+        if self._stone_longitude_present:
+            return self._stone_longitude_value
+        else:
+            raise AttributeError("missing required field 'longitude'")
+
+    @longitude.setter
+    def longitude(self, val):
+        val = self._stone_longitude_validator.validate(val)
+        self._stone_longitude_value = val
+        self._stone_longitude_present = True
+
+    @longitude.deleter
+    def longitude(self):
+        self._stone_longitude_value = None
+        self._stone_longitude_present = False
+
+    def __repr__(self):
+        return 'GeoLocation(latitude={!r}, longitude={!r})'.format(
+            self._stone_latitude_value,
+            self._stone_longitude_value,
+        )
+
+GeoLocation_validator = bv.Struct(GeoLocation)
 
 class GetDeliveryArg(object):
     """
@@ -1634,6 +1953,114 @@ class RequestError(object):
 
 RequestError_validator = bv.Struct(RequestError)
 
+class ResultAddress(BaseAddress):
+    """
+    An address where a delivery can be picked up or dropped off. This is the
+    address object returned by the API.
+
+    :ivar geoLocation: Geographical oordinates of the address.
+    :ivar city: City where the address belongs to.
+    """
+
+    __slots__ = [
+        '_stone_geoLocation_value',
+        '_stone_geoLocation_present',
+        '_stone_city_value',
+        '_stone_city_present',
+    ]
+
+    _has_required_fields = True
+
+    def __init__(self,
+                 firstLine=None,
+                 secondLine=None,
+                 floor=None,
+                 apartment=None,
+                 zone=None,
+                 district=None,
+                 geoLocation=None,
+                 city=None):
+        super(ResultAddress, self).__init__(firstLine,
+                                            secondLine,
+                                            floor,
+                                            apartment,
+                                            zone,
+                                            district)
+        self._stone_geoLocation_value = None
+        self._stone_geoLocation_present = False
+        self._stone_city_value = None
+        self._stone_city_present = False
+        if geoLocation is not None:
+            self.geoLocation = geoLocation
+        if city is not None:
+            self.city = city
+
+    @property
+    def geoLocation(self):
+        """
+        Geographical oordinates of the address.
+
+        :rtype: GeoLocation
+        """
+        if self._stone_geoLocation_present:
+            return self._stone_geoLocation_value
+        else:
+            return None
+
+    @geoLocation.setter
+    def geoLocation(self, val):
+        if val is None:
+            del self.geoLocation
+            return
+        self._stone_geoLocation_validator.validate_type_only(val)
+        self._stone_geoLocation_value = val
+        self._stone_geoLocation_present = True
+
+    @geoLocation.deleter
+    def geoLocation(self):
+        self._stone_geoLocation_value = None
+        self._stone_geoLocation_present = False
+
+    @property
+    def city(self):
+        """
+        City where the address belongs to.
+
+        :rtype: City
+        """
+        if self._stone_city_present:
+            return self._stone_city_value
+        else:
+            return None
+
+    @city.setter
+    def city(self, val):
+        if val is None:
+            del self.city
+            return
+        self._stone_city_validator.validate_type_only(val)
+        self._stone_city_value = val
+        self._stone_city_present = True
+
+    @city.deleter
+    def city(self):
+        self._stone_city_value = None
+        self._stone_city_present = False
+
+    def __repr__(self):
+        return 'ResultAddress(firstLine={!r}, secondLine={!r}, floor={!r}, apartment={!r}, zone={!r}, district={!r}, geoLocation={!r}, city={!r})'.format(
+            self._stone_firstLine_value,
+            self._stone_secondLine_value,
+            self._stone_floor_value,
+            self._stone_apartment_value,
+            self._stone_zone_value,
+            self._stone_district_value,
+            self._stone_geoLocation_value,
+            self._stone_city_value,
+        )
+
+ResultAddress_validator = bv.Struct(ResultAddress)
+
 class State(object):
     """
     State of a delivery.
@@ -1802,6 +2229,7 @@ Type_validator = bv.Struct(Type)
 
 class UpdateDeliveryArg(object):
     """
+    :ivar _id: ID of the delivery to update.
     :ivar receiver: Delivery receiver details object.
     :ivar pickupAddress: Delivery pickup address.
     :ivar dropOffAddress: Delivery destination address.
@@ -1814,6 +2242,8 @@ class UpdateDeliveryArg(object):
     """
 
     __slots__ = [
+        '_stone__id_value',
+        '_stone__id_present',
         '_stone_receiver_value',
         '_stone_receiver_present',
         '_stone_pickupAddress_value',
@@ -1830,9 +2260,10 @@ class UpdateDeliveryArg(object):
         '_stone_webhookUrl_present',
     ]
 
-    _has_required_fields = False
+    _has_required_fields = True
 
     def __init__(self,
+                 _id=None,
                  receiver=None,
                  pickupAddress=None,
                  dropOffAddress=None,
@@ -1840,6 +2271,8 @@ class UpdateDeliveryArg(object):
                  cod=None,
                  businessReference=None,
                  webhookUrl=None):
+        self._stone__id_value = None
+        self._stone__id_present = False
         self._stone_receiver_value = None
         self._stone_receiver_present = False
         self._stone_pickupAddress_value = None
@@ -1854,6 +2287,8 @@ class UpdateDeliveryArg(object):
         self._stone_businessReference_present = False
         self._stone_webhookUrl_value = None
         self._stone_webhookUrl_present = False
+        if _id is not None:
+            self._id = _id
         if receiver is not None:
             self.receiver = receiver
         if pickupAddress is not None:
@@ -1868,6 +2303,29 @@ class UpdateDeliveryArg(object):
             self.businessReference = businessReference
         if webhookUrl is not None:
             self.webhookUrl = webhookUrl
+
+    @property
+    def _id(self):
+        """
+        ID of the delivery to update.
+
+        :rtype: str
+        """
+        if self._stone__id_present:
+            return self._stone__id_value
+        else:
+            raise AttributeError("missing required field '_id'")
+
+    @_id.setter
+    def _id(self, val):
+        val = self._stone__id_validator.validate(val)
+        self._stone__id_value = val
+        self._stone__id_present = True
+
+    @_id.deleter
+    def _id(self):
+        self._stone__id_value = None
+        self._stone__id_present = False
 
     @property
     def receiver(self):
@@ -2052,7 +2510,8 @@ class UpdateDeliveryArg(object):
         self._stone_webhookUrl_present = False
 
     def __repr__(self):
-        return 'UpdateDeliveryArg(receiver={!r}, pickupAddress={!r}, dropOffAddress={!r}, notes={!r}, cod={!r}, businessReference={!r}, webhookUrl={!r})'.format(
+        return 'UpdateDeliveryArg(_id={!r}, receiver={!r}, pickupAddress={!r}, dropOffAddress={!r}, notes={!r}, cod={!r}, businessReference={!r}, webhookUrl={!r})'.format(
+            self._stone__id_value,
             self._stone_receiver_value,
             self._stone_pickupAddress_value,
             self._stone_dropOffAddress_value,
@@ -2145,33 +2604,49 @@ class UpdateDeliveryResult(object):
 
 UpdateDeliveryResult_validator = bv.Struct(UpdateDeliveryResult)
 
-Address._stone_geoLocation_validator = bv.Nullable(bv.List(bv.Float32(), max_items=2))
-Address._stone_firstLine_validator = bv.String()
-Address._stone_secondLine_validator = bv.Nullable(bv.String())
-Address._stone_floor_validator = bv.Nullable(bv.Int32())
-Address._stone_apartment_validator = bv.Nullable(bv.Int32())
-Address._stone_zone_validator = bv.Nullable(bv.String())
-Address._stone_district_validator = bv.Nullable(bv.String())
-Address._stone_city_validator = bv.String(pattern='^EG-0(1|2)$')
-Address._all_field_names_ = set([
-    'geoLocation',
+BaseAddress._stone_firstLine_validator = bv.String()
+BaseAddress._stone_secondLine_validator = bv.Nullable(bv.String())
+BaseAddress._stone_floor_validator = bv.Nullable(bv.Int32())
+BaseAddress._stone_apartment_validator = bv.Nullable(bv.Int32())
+BaseAddress._stone_zone_validator = bv.Nullable(bv.String())
+BaseAddress._stone_district_validator = bv.Nullable(bv.String())
+BaseAddress._all_field_names_ = set([
     'firstLine',
     'secondLine',
     'floor',
     'apartment',
     'zone',
     'district',
-    'city',
 ])
-Address._all_fields_ = [
+BaseAddress._all_fields_ = [
+    ('firstLine', BaseAddress._stone_firstLine_validator),
+    ('secondLine', BaseAddress._stone_secondLine_validator),
+    ('floor', BaseAddress._stone_floor_validator),
+    ('apartment', BaseAddress._stone_apartment_validator),
+    ('zone', BaseAddress._stone_zone_validator),
+    ('district', BaseAddress._stone_district_validator),
+]
+
+Address._stone_geoLocation_validator = bv.Nullable(bv.List(bv.Float32(), max_items=2))
+Address._stone_city_validator = bv.String(pattern='^EG-0(1|2)$')
+Address._all_field_names_ = BaseAddress._all_field_names_.union(set([
+    'geoLocation',
+    'city',
+]))
+Address._all_fields_ = BaseAddress._all_fields_ + [
     ('geoLocation', Address._stone_geoLocation_validator),
-    ('firstLine', Address._stone_firstLine_validator),
-    ('secondLine', Address._stone_secondLine_validator),
-    ('floor', Address._stone_floor_validator),
-    ('apartment', Address._stone_apartment_validator),
-    ('zone', Address._stone_zone_validator),
-    ('district', Address._stone_district_validator),
     ('city', Address._stone_city_validator),
+]
+
+City._stone__id_validator = bv.String()
+City._stone_name_validator = bv.String()
+City._all_field_names_ = set([
+    '_id',
+    'name',
+])
+City._all_fields_ = [
+    ('_id', City._stone__id_validator),
+    ('name', City._stone_name_validator),
 ]
 
 CreateDeliveryArg._stone_receiver_validator = Receiver_validator
@@ -2220,6 +2695,10 @@ CreateDeliveryResult._all_fields_ = [
     ('state', CreateDeliveryResult._stone_state_validator),
 ]
 
+DeleteDeliveryArg._stone__id_validator = bv.String()
+DeleteDeliveryArg._all_field_names_ = set(['_id'])
+DeleteDeliveryArg._all_fields_ = [('_id', DeleteDeliveryArg._stone__id_validator)]
+
 DeleteDeliveryResult._stone__id_validator = bv.String()
 DeleteDeliveryResult._stone_message_validator = bv.String()
 DeleteDeliveryResult._all_field_names_ = set([
@@ -2231,15 +2710,18 @@ DeleteDeliveryResult._all_fields_ = [
     ('message', DeleteDeliveryResult._stone_message_validator),
 ]
 
-Delivery._stone_pickupAddress_validator = Address_validator
-Delivery._stone_dropOffAddress_validator = Address_validator
+Delivery._stone__id_validator = bv.String()
+Delivery._stone_pickupAddress_validator = ResultAddress_validator
+Delivery._stone_dropOffAddress_validator = ResultAddress_validator
 Delivery._stone_receiver_validator = Receiver_validator
 Delivery._stone_state_validator = State_validator
 Delivery._stone_trackingNumber_validator = bv.String()
 Delivery._stone_notes_validator = bv.Nullable(bv.String())
 Delivery._stone_cod_validator = bv.Nullable(bv.Float32())
 Delivery._stone_businessReference_validator = bv.Nullable(bv.String())
+Delivery._stone_type_validator = bv.Nullable(Type_validator)
 Delivery._all_field_names_ = set([
+    '_id',
     'pickupAddress',
     'dropOffAddress',
     'receiver',
@@ -2248,8 +2730,10 @@ Delivery._all_field_names_ = set([
     'notes',
     'cod',
     'businessReference',
+    'type',
 ])
 Delivery._all_fields_ = [
+    ('_id', Delivery._stone__id_validator),
     ('pickupAddress', Delivery._stone_pickupAddress_validator),
     ('dropOffAddress', Delivery._stone_dropOffAddress_validator),
     ('receiver', Delivery._stone_receiver_validator),
@@ -2258,6 +2742,7 @@ Delivery._all_fields_ = [
     ('notes', Delivery._stone_notes_validator),
     ('cod', Delivery._stone_cod_validator),
     ('businessReference', Delivery._stone_businessReference_validator),
+    ('type', Delivery._stone_type_validator),
 ]
 
 Error._stone_code_validator = bv.Int32()
@@ -2269,6 +2754,17 @@ Error._all_field_names_ = set([
 Error._all_fields_ = [
     ('code', Error._stone_code_validator),
     ('message', Error._stone_message_validator),
+]
+
+GeoLocation._stone_latitude_validator = bv.Float32()
+GeoLocation._stone_longitude_validator = bv.Float32()
+GeoLocation._all_field_names_ = set([
+    'latitude',
+    'longitude',
+])
+GeoLocation._all_fields_ = [
+    ('latitude', GeoLocation._stone_latitude_validator),
+    ('longitude', GeoLocation._stone_longitude_validator),
 ]
 
 GetDeliveryArg._stone__id_validator = bv.String()
@@ -2315,6 +2811,17 @@ RequestError._stone_errors_validator = bv.List(Error_validator)
 RequestError._all_field_names_ = set(['errors'])
 RequestError._all_fields_ = [('errors', RequestError._stone_errors_validator)]
 
+ResultAddress._stone_geoLocation_validator = bv.Nullable(GeoLocation_validator)
+ResultAddress._stone_city_validator = bv.Nullable(City_validator)
+ResultAddress._all_field_names_ = BaseAddress._all_field_names_.union(set([
+    'geoLocation',
+    'city',
+]))
+ResultAddress._all_fields_ = BaseAddress._all_fields_ + [
+    ('geoLocation', ResultAddress._stone_geoLocation_validator),
+    ('city', ResultAddress._stone_city_validator),
+]
+
 State._stone_value_validator = bv.String()
 State._stone_code_validator = bv.Int32()
 State._all_field_names_ = set([
@@ -2337,6 +2844,7 @@ Type._all_fields_ = [
     ('code', Type._stone_code_validator),
 ]
 
+UpdateDeliveryArg._stone__id_validator = bv.String()
 UpdateDeliveryArg._stone_receiver_validator = bv.Nullable(Receiver_validator)
 UpdateDeliveryArg._stone_pickupAddress_validator = bv.Nullable(Address_validator)
 UpdateDeliveryArg._stone_dropOffAddress_validator = bv.Nullable(Address_validator)
@@ -2345,6 +2853,7 @@ UpdateDeliveryArg._stone_cod_validator = bv.Nullable(bv.Int32())
 UpdateDeliveryArg._stone_businessReference_validator = bv.Nullable(bv.String())
 UpdateDeliveryArg._stone_webhookUrl_validator = bv.Nullable(bv.String())
 UpdateDeliveryArg._all_field_names_ = set([
+    '_id',
     'receiver',
     'pickupAddress',
     'dropOffAddress',
@@ -2354,6 +2863,7 @@ UpdateDeliveryArg._all_field_names_ = set([
     'webhookUrl',
 ])
 UpdateDeliveryArg._all_fields_ = [
+    ('_id', UpdateDeliveryArg._stone__id_validator),
     ('receiver', UpdateDeliveryArg._stone_receiver_validator),
     ('pickupAddress', UpdateDeliveryArg._stone_pickupAddress_validator),
     ('dropOffAddress', UpdateDeliveryArg._stone_dropOffAddress_validator),
@@ -2380,15 +2890,17 @@ create = bb.Route(
     CreateDeliveryArg_validator,
     CreateDeliveryResult_validator,
     RequestError_validator,
-    {},
+    {'url_param': None,
+     'has_body': True},
 )
 delete = bb.Route(
     'delete',
     False,
-    bv.Void(),
+    DeleteDeliveryArg_validator,
     DeleteDeliveryResult_validator,
     RequestError_validator,
-    {},
+    {'url_param': '_id',
+     'has_body': False},
 )
 get = bb.Route(
     'get',
@@ -2396,7 +2908,8 @@ get = bb.Route(
     GetDeliveryArg_validator,
     GetDeliveryResult_validator,
     RequestError_validator,
-    {},
+    {'url_param': '_id',
+     'has_body': False},
 )
 list = bb.Route(
     'list',
@@ -2404,7 +2917,8 @@ list = bb.Route(
     ListDeliveryArg_validator,
     ListDeliveryResult_validator,
     RequestError_validator,
-    {},
+    {'url_param': None,
+     'has_body': False},
 )
 update = bb.Route(
     'update',
@@ -2412,7 +2926,8 @@ update = bb.Route(
     UpdateDeliveryArg_validator,
     UpdateDeliveryResult_validator,
     RequestError_validator,
-    {},
+    {'url_param': '_id',
+     'has_body': True},
 )
 
 ROUTES = {
