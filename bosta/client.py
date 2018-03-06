@@ -1,6 +1,7 @@
 """Bosta client."""
 
 import json
+import os
 
 import requests
 
@@ -15,8 +16,6 @@ class BostaException(Exception):
 class Bosta(BostaBase):
     """Bosta client."""
 
-    API_BASE = 'http://staging-api.bosta.co/api/v0/'
-
     _method_map = {
         'list': 'get',
         'create': 'post',
@@ -25,8 +24,12 @@ class Bosta(BostaBase):
         'delete': 'delete',
     }
 
-    def __init__(self, api_key):
+    def __init__(self, api_key, api_base=None):
         """Initialize the client."""
+        self.api_base = (
+            api_base
+            or os.getenv('BOSTA_API_BASE', 'https://api.bosta.co/api/v0/'))
+
         self.session = requests.session()
         self.session.headers.update({
             'Content-Type': 'application/json',
@@ -36,7 +39,7 @@ class Bosta(BostaBase):
     def request(self, route, namespace, arg, arg_binary=None):
         """Send request."""
         method = self._method_map[route.name]
-        url = self.API_BASE + namespace
+        url = self.api_base + namespace
         if route.attrs.get('url_param'):
             url_param = route.attrs.get('url_param')
             url = '/'.join([url, getattr(arg, url_param)])
