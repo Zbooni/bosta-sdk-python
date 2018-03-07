@@ -2891,6 +2891,7 @@ create = bb.Route(
     CreateDeliveryResult_validator,
     RequestError_validator,
     {'url_param': None,
+     'query_params': None,
      'has_body': True},
 )
 delete = bb.Route(
@@ -2900,6 +2901,7 @@ delete = bb.Route(
     DeleteDeliveryResult_validator,
     RequestError_validator,
     {'url_param': '_id',
+     'query_params': None,
      'has_body': False},
 )
 get = bb.Route(
@@ -2909,6 +2911,7 @@ get = bb.Route(
     GetDeliveryResult_validator,
     RequestError_validator,
     {'url_param': '_id',
+     'query_params': None,
      'has_body': False},
 )
 list = bb.Route(
@@ -2918,6 +2921,7 @@ list = bb.Route(
     ListDeliveryResult_validator,
     RequestError_validator,
     {'url_param': None,
+     'query_params': 'page, perPage',
      'has_body': False},
 )
 update = bb.Route(
@@ -2927,6 +2931,7 @@ update = bb.Route(
     UpdateDeliveryResult_validator,
     RequestError_validator,
     {'url_param': '_id',
+     'query_params': None,
      'has_body': True},
 )
 
