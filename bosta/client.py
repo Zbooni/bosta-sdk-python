@@ -52,6 +52,16 @@ class Bosta(BostaBase):
             addl_request_kwargs.update({
                 'data': json.dumps(arg_dict),
             })
+        if route.attrs.get('query_params'):
+            params = {
+                i.strip(): getattr(arg, i.strip())
+                for i in route.attrs.get('query_params').split(',')
+                if getattr(arg, i.strip()) is not None
+            }
+            if params:
+                addl_request_kwargs.update({
+                    'params': params
+                })
 
         resp = self.session.request(
             method=method, url=url, **addl_request_kwargs)
