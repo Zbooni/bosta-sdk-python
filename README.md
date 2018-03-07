@@ -22,7 +22,7 @@ result = bosta.deliveries_create(
     receiver=receiver, pickupAddress=pickup_address,
     dropoff_address=dropoff_address)
 
-bosta.deliveries_list()
+bosta.deliveries_list(perPage=10, page=1)
 
 bosta.deliveries_get(_id=result._id)
 
