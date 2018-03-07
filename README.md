@@ -11,7 +11,7 @@ import os
 from bosta import *
 
 bosta = Bosta(
-    api_key=os.getenv('BOSTA_API_KEY'), api_base=os.getenv('BOSTA_API_KEY'))
+    api_key=os.getenv('BOSTA_API_KEY'), api_base=os.getenv('BOSTA_API_BASE'))
 
 receiver = Receiver(
     firstName='Lemuel', lastName='Formacil', phone='+201551234567')
