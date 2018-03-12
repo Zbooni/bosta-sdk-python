@@ -763,6 +763,7 @@ class CreateDeliveryResult(object):
     :ivar _id: ID of the created delivery.
     :ivar message: Success message.
     :ivar state: State of the created delivery.
+    :ivar trackingNumber: Bosta tracking number.
     """
 
     __slots__ = [
@@ -772,6 +773,8 @@ class CreateDeliveryResult(object):
         '_stone_message_present',
         '_stone_state_value',
         '_stone_state_present',
+        '_stone_trackingNumber_value',
+        '_stone_trackingNumber_present',
     ]
 
     _has_required_fields = True
@@ -779,19 +782,24 @@ class CreateDeliveryResult(object):
     def __init__(self,
                  _id=None,
                  message=None,
-                 state=None):
+                 state=None,
+                 trackingNumber=None):
         self._stone__id_value = None
         self._stone__id_present = False
         self._stone_message_value = None
         self._stone_message_present = False
         self._stone_state_value = None
         self._stone_state_present = False
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
         if _id is not None:
             self._id = _id
         if message is not None:
             self.message = message
         if state is not None:
             self.state = state
+        if trackingNumber is not None:
+            self.trackingNumber = trackingNumber
 
     @property
     def _id(self):
@@ -862,11 +870,35 @@ class CreateDeliveryResult(object):
         self._stone_state_value = None
         self._stone_state_present = False
 
+    @property
+    def trackingNumber(self):
+        """
+        Bosta tracking number.
+
+        :rtype: str
+        """
+        if self._stone_trackingNumber_present:
+            return self._stone_trackingNumber_value
+        else:
+            raise AttributeError("missing required field 'trackingNumber'")
+
+    @trackingNumber.setter
+    def trackingNumber(self, val):
+        val = self._stone_trackingNumber_validator.validate(val)
+        self._stone_trackingNumber_value = val
+        self._stone_trackingNumber_present = True
+
+    @trackingNumber.deleter
+    def trackingNumber(self):
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
+
     def __repr__(self):
-        return 'CreateDeliveryResult(_id={!r}, message={!r}, state={!r})'.format(
+        return 'CreateDeliveryResult(_id={!r}, message={!r}, state={!r}, trackingNumber={!r})'.format(
             self._stone__id_value,
             self._stone_message_value,
             self._stone_state_value,
+            self._stone_trackingNumber_value,
         )
 
 CreateDeliveryResult_validator = bv.Struct(CreateDeliveryResult)
@@ -2684,15 +2716,18 @@ CreateDeliveryArg._all_fields_ = [
 CreateDeliveryResult._stone__id_validator = bv.String()
 CreateDeliveryResult._stone_message_validator = bv.String()
 CreateDeliveryResult._stone_state_validator = State_validator
+CreateDeliveryResult._stone_trackingNumber_validator = bv.String()
 CreateDeliveryResult._all_field_names_ = set([
     '_id',
     'message',
     'state',
+    'trackingNumber',
 ])
 CreateDeliveryResult._all_fields_ = [
     ('_id', CreateDeliveryResult._stone__id_validator),
     ('message', CreateDeliveryResult._stone_message_validator),
     ('state', CreateDeliveryResult._stone_state_validator),
+    ('trackingNumber', CreateDeliveryResult._stone_trackingNumber_validator),
 ]
 
 DeleteDeliveryArg._stone__id_validator = bv.String()
