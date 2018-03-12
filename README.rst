@@ -21,7 +21,7 @@ Usage
 
     result = bosta.deliveries_create(
         receiver=receiver, pickupAddress=pickup_address,
-        dropoff_address=dropoff_address)
+        dropOffAddress=dropoff_address, type=10)
 
     bosta.deliveries_list(perPage=10, page=1)
 
