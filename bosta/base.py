@@ -36,7 +36,7 @@ class BostaBase(object):
         arg = airwaybill.GetAirWaybillArg(_id)
         r = self.request(
             airwaybill.get,
-            'airwaybill',
+            'deliveries/awb',
             arg,
             None,
         )
@@ -207,4 +207,3 @@ class BostaBase(object):
             None,
         )
         return r
-
