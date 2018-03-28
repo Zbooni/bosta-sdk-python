@@ -7,6 +7,7 @@ from abc import ABCMeta, abstractmethod
 
 from . import (
     airwaybill,
+    common,
     deliveries,
 )
 

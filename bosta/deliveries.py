@@ -16,6 +16,13 @@ except (ImportError, SystemError, ValueError):
     import stone_validators as bv
     import stone_base as bb
 
+try:
+    from . import (
+        common,
+    )
+except (ImportError, SystemError, ValueError):
+    import common
+
 class BaseAddress(object):
     """
     Struct with common address fields.
@@ -1385,89 +1392,6 @@ class Delivery(object):
 
 Delivery_validator = bv.Struct(Delivery)
 
-class Error(object):
-    """
-    Error object returned by the API.
-
-    :ivar code: Error code.
-    :ivar message: Error message.
-    """
-
-    __slots__ = [
-        '_stone_code_value',
-        '_stone_code_present',
-        '_stone_message_value',
-        '_stone_message_present',
-    ]
-
-    _has_required_fields = True
-
-    def __init__(self,
-                 code=None,
-                 message=None):
-        self._stone_code_value = None
-        self._stone_code_present = False
-        self._stone_message_value = None
-        self._stone_message_present = False
-        if code is not None:
-            self.code = code
-        if message is not None:
-            self.message = message
-
-    @property
-    def code(self):
-        """
-        Error code.
-
-        :rtype: long
-        """
-        if self._stone_code_present:
-            return self._stone_code_value
-        else:
-            raise AttributeError("missing required field 'code'")
-
-    @code.setter
-    def code(self, val):
-        val = self._stone_code_validator.validate(val)
-        self._stone_code_value = val
-        self._stone_code_present = True
-
-    @code.deleter
-    def code(self):
-        self._stone_code_value = None
-        self._stone_code_present = False
-
-    @property
-    def message(self):
-        """
-        Error message.
-
-        :rtype: str
-        """
-        if self._stone_message_present:
-            return self._stone_message_value
-        else:
-            raise AttributeError("missing required field 'message'")
-
-    @message.setter
-    def message(self, val):
-        val = self._stone_message_validator.validate(val)
-        self._stone_message_value = val
-        self._stone_message_present = True
-
-    @message.deleter
-    def message(self):
-        self._stone_message_value = None
-        self._stone_message_present = False
-
-    def __repr__(self):
-        return 'Error(code={!r}, message={!r})'.format(
-            self._stone_code_value,
-            self._stone_message_value,
-        )
-
-Error_validator = bv.Struct(Error)
-
 class GeoLocation(object):
     """
     Coordinates to a point on Earth.
@@ -1935,55 +1859,6 @@ class Receiver(object):
         )
 
 Receiver_validator = bv.Struct(Receiver)
-
-class RequestError(object):
-    """
-    :ivar errors: List of errors.
-    """
-
-    __slots__ = [
-        '_stone_errors_value',
-        '_stone_errors_present',
-    ]
-
-    _has_required_fields = True
-
-    def __init__(self,
-                 errors=None):
-        self._stone_errors_value = None
-        self._stone_errors_present = False
-        if errors is not None:
-            self.errors = errors
-
-    @property
-    def errors(self):
-        """
-        List of errors.
-
-        :rtype: list of [Error]
-        """
-        if self._stone_errors_present:
-            return self._stone_errors_value
-        else:
-            raise AttributeError("missing required field 'errors'")
-
-    @errors.setter
-    def errors(self, val):
-        val = self._stone_errors_validator.validate(val)
-        self._stone_errors_value = val
-        self._stone_errors_present = True
-
-    @errors.deleter
-    def errors(self):
-        self._stone_errors_value = None
-        self._stone_errors_present = False
-
-    def __repr__(self):
-        return 'RequestError(errors={!r})'.format(
-            self._stone_errors_value,
-        )
-
-RequestError_validator = bv.Struct(RequestError)
 
 class ResultAddress(BaseAddress):
     """
@@ -2468,7 +2343,7 @@ class UpdateDeliveryArg(object):
         """
         Cash on delivery amount if required.
 
-        :rtype: long
+        :rtype: float
         """
         if self._stone_cod_present:
             return self._stone_cod_value
@@ -2780,17 +2655,6 @@ Delivery._all_fields_ = [
     ('type', Delivery._stone_type_validator),
 ]
 
-Error._stone_code_validator = bv.Int32()
-Error._stone_message_validator = bv.String()
-Error._all_field_names_ = set([
-    'code',
-    'message',
-])
-Error._all_fields_ = [
-    ('code', Error._stone_code_validator),
-    ('message', Error._stone_message_validator),
-]
-
 GeoLocation._stone_latitude_validator = bv.Float32()
 GeoLocation._stone_longitude_validator = bv.Float32()
 GeoLocation._all_field_names_ = set([
@@ -2842,10 +2706,6 @@ Receiver._all_fields_ = [
     ('email', Receiver._stone_email_validator),
 ]
 
-RequestError._stone_errors_validator = bv.List(Error_validator)
-RequestError._all_field_names_ = set(['errors'])
-RequestError._all_fields_ = [('errors', RequestError._stone_errors_validator)]
-
 ResultAddress._stone_geoLocation_validator = bv.Nullable(GeoLocation_validator)
 ResultAddress._stone_city_validator = bv.Nullable(City_validator)
 ResultAddress._all_field_names_ = BaseAddress._all_field_names_.union(set([
@@ -2884,7 +2744,7 @@ UpdateDeliveryArg._stone_receiver_validator = bv.Nullable(Receiver_validator)
 UpdateDeliveryArg._stone_pickupAddress_validator = bv.Nullable(Address_validator)
 UpdateDeliveryArg._stone_dropOffAddress_validator = bv.Nullable(Address_validator)
 UpdateDeliveryArg._stone_notes_validator = bv.Nullable(bv.String())
-UpdateDeliveryArg._stone_cod_validator = bv.Nullable(bv.Int32())
+UpdateDeliveryArg._stone_cod_validator = bv.Nullable(bv.Float32())
 UpdateDeliveryArg._stone_businessReference_validator = bv.Nullable(bv.String())
 UpdateDeliveryArg._stone_webhookUrl_validator = bv.Nullable(bv.String())
 UpdateDeliveryArg._all_field_names_ = set([
@@ -2924,7 +2784,7 @@ create = bb.Route(
     False,
     CreateDeliveryArg_validator,
     CreateDeliveryResult_validator,
-    RequestError_validator,
+    common.RequestError_validator,
     {'url_param': None,
      'query_params': None,
      'has_body': True},
@@ -2934,7 +2794,7 @@ delete = bb.Route(
     False,
     DeleteDeliveryArg_validator,
     DeleteDeliveryResult_validator,
-    RequestError_validator,
+    common.RequestError_validator,
     {'url_param': '_id',
      'query_params': None,
      'has_body': False},
@@ -2944,7 +2804,7 @@ get = bb.Route(
     False,
     GetDeliveryArg_validator,
     GetDeliveryResult_validator,
-    RequestError_validator,
+    common.RequestError_validator,
     {'url_param': '_id',
      'query_params': None,
      'has_body': False},
@@ -2954,7 +2814,7 @@ list = bb.Route(
     False,
     ListDeliveryArg_validator,
     ListDeliveryResult_validator,
-    RequestError_validator,
+    common.RequestError_validator,
     {'url_param': None,
      'query_params': 'page, perPage',
      'has_body': False},
@@ -2964,7 +2824,7 @@ update = bb.Route(
     False,
     UpdateDeliveryArg_validator,
     UpdateDeliveryResult_validator,
-    RequestError_validator,
+    common.RequestError_validator,
     {'url_param': '_id',
      'query_params': None,
      'has_body': True},
