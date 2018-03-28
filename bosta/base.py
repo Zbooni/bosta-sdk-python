@@ -6,6 +6,7 @@
 from abc import ABCMeta, abstractmethod
 
 from . import (
+    airwaybill,
     deliveries,
 )
 
@@ -16,6 +17,30 @@ class BostaBase(object):
     @abstractmethod
     def request(self, route, namespace, arg, arg_binary=None):
         pass
+
+    # ------------------------------------------
+    # Routes in airwaybill namespace
+
+    def airwaybill_get(self,
+                       _id):
+        """
+        Returns details of the air waybill with the given delivery ID.
+
+        :param str _id: ID of the requested delivery.
+        :rtype: :class:`bosta.airwaybill.GetAirWaybillResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.airwaybill.RequestError`
+        """
+        arg = airwaybill.GetAirWaybillArg(_id)
+        r = self.request(
+            airwaybill.get,
+            'deliveries/awb',
+            arg,
+            None,
+        )
+        return r
 
     # ------------------------------------------
     # Routes in deliveries namespace
@@ -182,4 +207,3 @@ class BostaBase(object):
             None,
         )
         return r
-
