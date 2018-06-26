@@ -238,7 +238,7 @@ class BostaBase(object):
                                               address)
         r = self.request(
             subaccounts.create,
-            'subaccounts',
+            'business-subaccounts',
             arg,
             None,
         )
