@@ -9,6 +9,7 @@ from . import (
     airwaybill,
     common,
     deliveries,
+    subaccounts,
 )
 
 
@@ -55,6 +56,7 @@ class BostaBase(object):
                           cod=None,
                           isSameDay=None,
                           businessReference=None,
+                          subAccountId=None,
                           webhookUrl=None):
         """
         Create a new delivery object.
@@ -71,6 +73,7 @@ class BostaBase(object):
             performed on the same day.
         :param Nullable businessReference: Reference number from the client
             system.
+        :param Nullable subAccountId: ID of the sub account.
         :param Nullable webhookUrl: URL where HTTP POST requests of state
             updates should be sent to.
         :rtype: :class:`bosta.deliveries.CreateDeliveryResult`
@@ -87,6 +90,7 @@ class BostaBase(object):
                                            cod,
                                            isSameDay,
                                            businessReference,
+                                           subAccountId,
                                            webhookUrl)
         r = self.request(
             deliveries.create,
@@ -204,6 +208,37 @@ class BostaBase(object):
         r = self.request(
             deliveries.update,
             'deliveries',
+            arg,
+            None,
+        )
+        return r
+
+    # ------------------------------------------
+    # Routes in subaccounts namespace
+
+    def subaccounts_create(self,
+                           name,
+                           phone,
+                           address):
+        """
+        Create a new sub account object.
+
+        :param str name: Sub account's business name.
+        :param str phone: Sub account's business phone.
+        :param address: Sub account's business address.
+        :type address: :class:`bosta.subaccounts.Address`
+        :rtype: :class:`bosta.subaccounts.CreateSubAccountResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.subaccounts.RequestError`
+        """
+        arg = subaccounts.CreateSubAccountArg(name,
+                                              phone,
+                                              address)
+        r = self.request(
+            subaccounts.create,
+            'subaccounts',
             arg,
             None,
         )

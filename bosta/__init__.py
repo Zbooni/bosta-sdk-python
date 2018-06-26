@@ -4,5 +4,5 @@ __all__ = ['Bosta', 'BostaException', 'Address', 'Receiver']
 
 from .client import Bosta
 from .client import BostaException
-from .deliveries import Address
+from .common import Address
 from .deliveries import Receiver
