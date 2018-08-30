@@ -52,12 +52,14 @@ class BostaBase(object):
                           type,
                           pickupAddress=None,
                           dropOffAddress=None,
+                          returnAddress=None,
                           notes=None,
                           cod=None,
                           isSameDay=None,
                           businessReference=None,
                           subAccountId=None,
-                          webhookUrl=None):
+                          webhookUrl=None,
+                          trackingNumber=None):
         """
         Create a new delivery object.
 
@@ -65,6 +67,7 @@ class BostaBase(object):
         :type receiver: :class:`bosta.deliveries.Receiver`
         :param Nullable pickupAddress: Delivery pickup address.
         :param Nullable dropOffAddress: Delivery destination address.
+        :param Nullable returnAddress: Delivery return address.
         :param Nullable notes: Instructions for the Bosta star or Bosta admins
             regarding the delivery.
         :param Nullable cod: Cash on delivery amount if required.
@@ -76,6 +79,7 @@ class BostaBase(object):
         :param Nullable subAccountId: ID of the sub account.
         :param Nullable webhookUrl: URL where HTTP POST requests of state
             updates should be sent to.
+        :param Nullable trackingNumber: Bosta tracking number.
         :rtype: :class:`bosta.deliveries.CreateDeliveryResult`
         :raises: :class:`.exceptions.ApiError`
 
@@ -86,12 +90,14 @@ class BostaBase(object):
                                            type,
                                            pickupAddress,
                                            dropOffAddress,
+                                           returnAddress,
                                            notes,
                                            cod,
                                            isSameDay,
                                            businessReference,
                                            subAccountId,
-                                           webhookUrl)
+                                           webhookUrl,
+                                           trackingNumber)
         r = self.request(
             deliveries.create,
             'deliveries',

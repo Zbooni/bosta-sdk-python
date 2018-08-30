@@ -585,12 +585,13 @@ ListSubAccountResult_validator = bv.Struct(ListSubAccountResult)
 
 class SubAccount(object):
     """
-    Delivery details.
+    Sub account details.
 
     :ivar _id: ID of the sub account.
     :ivar name: Sub account's business name.
     :ivar phone: Sub account's business phone.
     :ivar address: Sub account's business address.
+    :ivar createdAt: Date and time the sub account is created at.
     """
 
     __slots__ = [
@@ -602,6 +603,8 @@ class SubAccount(object):
         '_stone_phone_present',
         '_stone_address_value',
         '_stone_address_present',
+        '_stone_createdAt_value',
+        '_stone_createdAt_present',
     ]
 
     _has_required_fields = True
@@ -610,7 +613,8 @@ class SubAccount(object):
                  _id=None,
                  name=None,
                  phone=None,
-                 address=None):
+                 address=None,
+                 createdAt=None):
         self._stone__id_value = None
         self._stone__id_present = False
         self._stone_name_value = None
@@ -619,6 +623,8 @@ class SubAccount(object):
         self._stone_phone_present = False
         self._stone_address_value = None
         self._stone_address_present = False
+        self._stone_createdAt_value = None
+        self._stone_createdAt_present = False
         if _id is not None:
             self._id = _id
         if name is not None:
@@ -627,6 +633,8 @@ class SubAccount(object):
             self.phone = phone
         if address is not None:
             self.address = address
+        if createdAt is not None:
+            self.createdAt = createdAt
 
     @property
     def _id(self):
@@ -720,12 +728,36 @@ class SubAccount(object):
         self._stone_address_value = None
         self._stone_address_present = False
 
+    @property
+    def createdAt(self):
+        """
+        Date and time the sub account is created at.
+
+        :rtype: str
+        """
+        if self._stone_createdAt_present:
+            return self._stone_createdAt_value
+        else:
+            raise AttributeError("missing required field 'createdAt'")
+
+    @createdAt.setter
+    def createdAt(self, val):
+        val = self._stone_createdAt_validator.validate(val)
+        self._stone_createdAt_value = val
+        self._stone_createdAt_present = True
+
+    @createdAt.deleter
+    def createdAt(self):
+        self._stone_createdAt_value = None
+        self._stone_createdAt_present = False
+
     def __repr__(self):
-        return 'SubAccount(_id={!r}, name={!r}, phone={!r}, address={!r})'.format(
+        return 'SubAccount(_id={!r}, name={!r}, phone={!r}, address={!r}, createdAt={!r})'.format(
             self._stone__id_value,
             self._stone_name_value,
             self._stone_phone_value,
             self._stone_address_value,
+            self._stone_createdAt_value,
         )
 
 SubAccount_validator = bv.Struct(SubAccount)
@@ -1032,17 +1064,20 @@ SubAccount._stone__id_validator = bv.String()
 SubAccount._stone_name_validator = bv.String()
 SubAccount._stone_phone_validator = bv.String()
 SubAccount._stone_address_validator = common.ResultAddress_validator
+SubAccount._stone_createdAt_validator = bv.String()
 SubAccount._all_field_names_ = set([
     '_id',
     'name',
     'phone',
     'address',
+    'createdAt',
 ])
 SubAccount._all_fields_ = [
     ('_id', SubAccount._stone__id_validator),
     ('name', SubAccount._stone_name_validator),
     ('phone', SubAccount._stone_phone_validator),
     ('address', SubAccount._stone_address_validator),
+    ('createdAt', SubAccount._stone_createdAt_validator),
 ]
 
 UpdateSubAccountArg._stone__id_validator = bv.String()
