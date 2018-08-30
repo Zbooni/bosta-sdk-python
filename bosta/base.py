@@ -9,6 +9,7 @@ from . import (
     airwaybill,
     common,
     deliveries,
+    subaccounts,
 )
 
 
@@ -55,6 +56,7 @@ class BostaBase(object):
                           cod=None,
                           isSameDay=None,
                           businessReference=None,
+                          subAccountId=None,
                           webhookUrl=None):
         """
         Create a new delivery object.
@@ -71,6 +73,7 @@ class BostaBase(object):
             performed on the same day.
         :param Nullable businessReference: Reference number from the client
             system.
+        :param Nullable subAccountId: ID of the sub account.
         :param Nullable webhookUrl: URL where HTTP POST requests of state
             updates should be sent to.
         :rtype: :class:`bosta.deliveries.CreateDeliveryResult`
@@ -87,6 +90,7 @@ class BostaBase(object):
                                            cod,
                                            isSameDay,
                                            businessReference,
+                                           subAccountId,
                                            webhookUrl)
         r = self.request(
             deliveries.create,
@@ -204,6 +208,134 @@ class BostaBase(object):
         r = self.request(
             deliveries.update,
             'deliveries',
+            arg,
+            None,
+        )
+        return r
+
+    # ------------------------------------------
+    # Routes in subaccounts namespace
+
+    def subaccounts_create(self,
+                           name,
+                           phone,
+                           address):
+        """
+        Create a new sub account object.
+
+        :param str name: Sub account's business name.
+        :param str phone: Sub account's business phone.
+        :param address: Sub account's business address.
+        :type address: :class:`bosta.subaccounts.Address`
+        :rtype: :class:`bosta.subaccounts.CreateSubAccountResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.subaccounts.RequestError`
+        """
+        arg = subaccounts.CreateSubAccountArg(name,
+                                              phone,
+                                              address)
+        r = self.request(
+            subaccounts.create,
+            'business-subaccounts',
+            arg,
+            None,
+        )
+        return r
+
+    def subaccounts_delete(self,
+                           _id):
+        """
+        Cancel the sub account with the given ID.
+
+        :param str _id: ID of the sub account to delete.
+        :rtype: :class:`bosta.subaccounts.DeleteSubAccountResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.subaccounts.RequestError`
+        """
+        arg = subaccounts.DeleteSubAccountArg(_id)
+        r = self.request(
+            subaccounts.delete,
+            'business-subaccounts',
+            arg,
+            None,
+        )
+        return r
+
+    def subaccounts_get(self,
+                        _id):
+        """
+        Returns details of the sub account with the given ID.
+
+        :param str _id: ID of the requested sub account.
+        :rtype: :class:`bosta.subaccounts.GetSubAccountResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.subaccounts.RequestError`
+        """
+        arg = subaccounts.GetSubAccountArg(_id)
+        r = self.request(
+            subaccounts.get,
+            'business-subaccounts',
+            arg,
+            None,
+        )
+        return r
+
+    def subaccounts_list(self,
+                         page=None,
+                         perPage=None):
+        """
+        Lists all sub accounts created by the business account.
+
+        :param Nullable page: Page number if the result is paginated.
+        :param Nullable perPage: The limit of number of sub accounts that are
+            retrieved in one request.
+        :rtype: :class:`bosta.subaccounts.ListSubAccountResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.subaccounts.RequestError`
+        """
+        arg = subaccounts.ListSubAccountArg(page,
+                                            perPage)
+        r = self.request(
+            subaccounts.list,
+            'business-subaccounts',
+            arg,
+            None,
+        )
+        return r
+
+    def subaccounts_update(self,
+                           _id,
+                           name=None,
+                           phone=None,
+                           address=None):
+        """
+        Modify one or more fields in an existing sub account with the given ID.
+
+        :param str _id: ID of the sub account to update.
+        :param Nullable name: Sub account's business name.
+        :param Nullable phone: Sub account's business phone.
+        :param Nullable address: Sub account's business address.
+        :rtype: :class:`bosta.subaccounts.UpdateSubAccountResult`
+        :raises: :class:`.exceptions.ApiError`
+
+        If this raises, ApiError will contain:
+            :class:`bosta.subaccounts.RequestError`
+        """
+        arg = subaccounts.UpdateSubAccountArg(_id,
+                                              name,
+                                              phone,
+                                              address)
+        r = self.request(
+            subaccounts.update,
+            'business-subaccounts',
             arg,
             None,
         )
