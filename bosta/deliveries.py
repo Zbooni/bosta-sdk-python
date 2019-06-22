@@ -28,6 +28,7 @@ class CreateDeliveryArg(object):
     :ivar receiver: Delivery receiver details object.
     :ivar pickupAddress: Delivery pickup address.
     :ivar dropOffAddress: Delivery destination address.
+    :ivar returnAddress: Delivery return address.
     :ivar notes: Instructions for the Bosta star or Bosta admins regarding the
         delivery.
     :ivar cod: Cash on delivery amount if required.
@@ -38,6 +39,7 @@ class CreateDeliveryArg(object):
     :ivar subAccountId: ID of the sub account.
     :ivar webhookUrl: URL where HTTP POST requests of state updates should be
         sent to.
+    :ivar trackingNumber: Bosta tracking number.
     """
 
     __slots__ = [
@@ -47,6 +49,8 @@ class CreateDeliveryArg(object):
         '_stone_pickupAddress_present',
         '_stone_dropOffAddress_value',
         '_stone_dropOffAddress_present',
+        '_stone_returnAddress_value',
+        '_stone_returnAddress_present',
         '_stone_notes_value',
         '_stone_notes_present',
         '_stone_cod_value',
@@ -61,6 +65,8 @@ class CreateDeliveryArg(object):
         '_stone_subAccountId_present',
         '_stone_webhookUrl_value',
         '_stone_webhookUrl_present',
+        '_stone_trackingNumber_value',
+        '_stone_trackingNumber_present',
     ]
 
     _has_required_fields = True
@@ -70,18 +76,22 @@ class CreateDeliveryArg(object):
                  type=None,
                  pickupAddress=None,
                  dropOffAddress=None,
+                 returnAddress=None,
                  notes=None,
                  cod=None,
                  isSameDay=None,
                  businessReference=None,
                  subAccountId=None,
-                 webhookUrl=None):
+                 webhookUrl=None,
+                 trackingNumber=None):
         self._stone_receiver_value = None
         self._stone_receiver_present = False
         self._stone_pickupAddress_value = None
         self._stone_pickupAddress_present = False
         self._stone_dropOffAddress_value = None
         self._stone_dropOffAddress_present = False
+        self._stone_returnAddress_value = None
+        self._stone_returnAddress_present = False
         self._stone_notes_value = None
         self._stone_notes_present = False
         self._stone_cod_value = None
@@ -96,12 +106,16 @@ class CreateDeliveryArg(object):
         self._stone_subAccountId_present = False
         self._stone_webhookUrl_value = None
         self._stone_webhookUrl_present = False
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
         if receiver is not None:
             self.receiver = receiver
         if pickupAddress is not None:
             self.pickupAddress = pickupAddress
         if dropOffAddress is not None:
             self.dropOffAddress = dropOffAddress
+        if returnAddress is not None:
+            self.returnAddress = returnAddress
         if notes is not None:
             self.notes = notes
         if cod is not None:
@@ -116,6 +130,8 @@ class CreateDeliveryArg(object):
             self.subAccountId = subAccountId
         if webhookUrl is not None:
             self.webhookUrl = webhookUrl
+        if trackingNumber is not None:
+            self.trackingNumber = trackingNumber
 
     @property
     def receiver(self):
@@ -191,6 +207,32 @@ class CreateDeliveryArg(object):
     def dropOffAddress(self):
         self._stone_dropOffAddress_value = None
         self._stone_dropOffAddress_present = False
+
+    @property
+    def returnAddress(self):
+        """
+        Delivery return address.
+
+        :rtype: common.Address_validator
+        """
+        if self._stone_returnAddress_present:
+            return self._stone_returnAddress_value
+        else:
+            return None
+
+    @returnAddress.setter
+    def returnAddress(self, val):
+        if val is None:
+            del self.returnAddress
+            return
+        self._stone_returnAddress_validator.validate_type_only(val)
+        self._stone_returnAddress_value = val
+        self._stone_returnAddress_present = True
+
+    @returnAddress.deleter
+    def returnAddress(self):
+        self._stone_returnAddress_value = None
+        self._stone_returnAddress_present = False
 
     @property
     def notes(self):
@@ -371,18 +413,46 @@ class CreateDeliveryArg(object):
         self._stone_webhookUrl_value = None
         self._stone_webhookUrl_present = False
 
+    @property
+    def trackingNumber(self):
+        """
+        Bosta tracking number.
+
+        :rtype: str
+        """
+        if self._stone_trackingNumber_present:
+            return self._stone_trackingNumber_value
+        else:
+            return None
+
+    @trackingNumber.setter
+    def trackingNumber(self, val):
+        if val is None:
+            del self.trackingNumber
+            return
+        val = self._stone_trackingNumber_validator.validate(val)
+        self._stone_trackingNumber_value = val
+        self._stone_trackingNumber_present = True
+
+    @trackingNumber.deleter
+    def trackingNumber(self):
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
+
     def __repr__(self):
-        return 'CreateDeliveryArg(receiver={!r}, type={!r}, pickupAddress={!r}, dropOffAddress={!r}, notes={!r}, cod={!r}, isSameDay={!r}, businessReference={!r}, subAccountId={!r}, webhookUrl={!r})'.format(
+        return 'CreateDeliveryArg(receiver={!r}, type={!r}, pickupAddress={!r}, dropOffAddress={!r}, returnAddress={!r}, notes={!r}, cod={!r}, isSameDay={!r}, businessReference={!r}, subAccountId={!r}, webhookUrl={!r}, trackingNumber={!r})'.format(
             self._stone_receiver_value,
             self._stone_type_value,
             self._stone_pickupAddress_value,
             self._stone_dropOffAddress_value,
+            self._stone_returnAddress_value,
             self._stone_notes_value,
             self._stone_cod_value,
             self._stone_isSameDay_value,
             self._stone_businessReference_value,
             self._stone_subAccountId_value,
             self._stone_webhookUrl_value,
+            self._stone_trackingNumber_value,
         )
 
 CreateDeliveryArg_validator = bv.Struct(CreateDeliveryArg)
@@ -669,6 +739,7 @@ class Delivery(object):
     :ivar _id: ID of the delivery.
     :ivar pickupAddress: Address details where delivery is picked up from.
     :ivar dropOffAddress: Address details where delivery is delivered to.
+    :ivar returnAddress: Address details where delivery is returned to.
     :ivar receiver: Delivery receiver details.
     :ivar state: The current state of the delivery.
     :ivar trackingNumber: Bosta tracking number.
@@ -677,6 +748,8 @@ class Delivery(object):
     :ivar cod: Cash on delivery amount if required.
     :ivar businessReference: Reference number from the client system.
     :ivar type: The service type of the delivery.
+    :ivar createdAt: Date and time the delivery is created at.
+    :ivar tracker: Delivery tracker details object.
     """
 
     __slots__ = [
@@ -686,6 +759,8 @@ class Delivery(object):
         '_stone_pickupAddress_present',
         '_stone_dropOffAddress_value',
         '_stone_dropOffAddress_present',
+        '_stone_returnAddress_value',
+        '_stone_returnAddress_present',
         '_stone_receiver_value',
         '_stone_receiver_present',
         '_stone_state_value',
@@ -700,6 +775,10 @@ class Delivery(object):
         '_stone_businessReference_present',
         '_stone_type_value',
         '_stone_type_present',
+        '_stone_createdAt_value',
+        '_stone_createdAt_present',
+        '_stone_tracker_value',
+        '_stone_tracker_present',
     ]
 
     _has_required_fields = True
@@ -711,16 +790,21 @@ class Delivery(object):
                  receiver=None,
                  state=None,
                  trackingNumber=None,
+                 createdAt=None,
+                 returnAddress=None,
                  notes=None,
                  cod=None,
                  businessReference=None,
-                 type=None):
+                 type=None,
+                 tracker=None):
         self._stone__id_value = None
         self._stone__id_present = False
         self._stone_pickupAddress_value = None
         self._stone_pickupAddress_present = False
         self._stone_dropOffAddress_value = None
         self._stone_dropOffAddress_present = False
+        self._stone_returnAddress_value = None
+        self._stone_returnAddress_present = False
         self._stone_receiver_value = None
         self._stone_receiver_present = False
         self._stone_state_value = None
@@ -735,12 +819,18 @@ class Delivery(object):
         self._stone_businessReference_present = False
         self._stone_type_value = None
         self._stone_type_present = False
+        self._stone_createdAt_value = None
+        self._stone_createdAt_present = False
+        self._stone_tracker_value = None
+        self._stone_tracker_present = False
         if _id is not None:
             self._id = _id
         if pickupAddress is not None:
             self.pickupAddress = pickupAddress
         if dropOffAddress is not None:
             self.dropOffAddress = dropOffAddress
+        if returnAddress is not None:
+            self.returnAddress = returnAddress
         if receiver is not None:
             self.receiver = receiver
         if state is not None:
@@ -755,6 +845,10 @@ class Delivery(object):
             self.businessReference = businessReference
         if type is not None:
             self.type = type
+        if createdAt is not None:
+            self.createdAt = createdAt
+        if tracker is not None:
+            self.tracker = tracker
 
     @property
     def _id(self):
@@ -824,6 +918,32 @@ class Delivery(object):
     def dropOffAddress(self):
         self._stone_dropOffAddress_value = None
         self._stone_dropOffAddress_present = False
+
+    @property
+    def returnAddress(self):
+        """
+        Address details where delivery is returned to.
+
+        :rtype: common.ResultAddress_validator
+        """
+        if self._stone_returnAddress_present:
+            return self._stone_returnAddress_value
+        else:
+            return None
+
+    @returnAddress.setter
+    def returnAddress(self, val):
+        if val is None:
+            del self.returnAddress
+            return
+        self._stone_returnAddress_validator.validate_type_only(val)
+        self._stone_returnAddress_value = val
+        self._stone_returnAddress_present = True
+
+    @returnAddress.deleter
+    def returnAddress(self):
+        self._stone_returnAddress_value = None
+        self._stone_returnAddress_present = False
 
     @property
     def receiver(self):
@@ -998,18 +1118,70 @@ class Delivery(object):
         self._stone_type_value = None
         self._stone_type_present = False
 
+    @property
+    def createdAt(self):
+        """
+        Date and time the delivery is created at.
+
+        :rtype: str
+        """
+        if self._stone_createdAt_present:
+            return self._stone_createdAt_value
+        else:
+            raise AttributeError("missing required field 'createdAt'")
+
+    @createdAt.setter
+    def createdAt(self, val):
+        val = self._stone_createdAt_validator.validate(val)
+        self._stone_createdAt_value = val
+        self._stone_createdAt_present = True
+
+    @createdAt.deleter
+    def createdAt(self):
+        self._stone_createdAt_value = None
+        self._stone_createdAt_present = False
+
+    @property
+    def tracker(self):
+        """
+        Delivery tracker details object.
+
+        :rtype: Tracker
+        """
+        if self._stone_tracker_present:
+            return self._stone_tracker_value
+        else:
+            return None
+
+    @tracker.setter
+    def tracker(self, val):
+        if val is None:
+            del self.tracker
+            return
+        self._stone_tracker_validator.validate_type_only(val)
+        self._stone_tracker_value = val
+        self._stone_tracker_present = True
+
+    @tracker.deleter
+    def tracker(self):
+        self._stone_tracker_value = None
+        self._stone_tracker_present = False
+
     def __repr__(self):
-        return 'Delivery(_id={!r}, pickupAddress={!r}, dropOffAddress={!r}, receiver={!r}, state={!r}, trackingNumber={!r}, notes={!r}, cod={!r}, businessReference={!r}, type={!r})'.format(
+        return 'Delivery(_id={!r}, pickupAddress={!r}, dropOffAddress={!r}, receiver={!r}, state={!r}, trackingNumber={!r}, createdAt={!r}, returnAddress={!r}, notes={!r}, cod={!r}, businessReference={!r}, type={!r}, tracker={!r})'.format(
             self._stone__id_value,
             self._stone_pickupAddress_value,
             self._stone_dropOffAddress_value,
             self._stone_receiver_value,
             self._stone_state_value,
             self._stone_trackingNumber_value,
+            self._stone_createdAt_value,
+            self._stone_returnAddress_value,
             self._stone_notes_value,
             self._stone_cod_value,
             self._stone_businessReference_value,
             self._stone_type_value,
+            self._stone_tracker_value,
         )
 
 Delivery_validator = bv.Struct(Delivery)
@@ -1482,6 +1654,89 @@ class State(object):
 
 State_validator = bv.Struct(State)
 
+class Tracker(object):
+    """
+    Tracker of a delivery.
+
+    :ivar trackerId: ID of the tracker.
+    :ivar trackingNumber: Bosta tracking number.
+    """
+
+    __slots__ = [
+        '_stone_trackerId_value',
+        '_stone_trackerId_present',
+        '_stone_trackingNumber_value',
+        '_stone_trackingNumber_present',
+    ]
+
+    _has_required_fields = True
+
+    def __init__(self,
+                 trackerId=None,
+                 trackingNumber=None):
+        self._stone_trackerId_value = None
+        self._stone_trackerId_present = False
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
+        if trackerId is not None:
+            self.trackerId = trackerId
+        if trackingNumber is not None:
+            self.trackingNumber = trackingNumber
+
+    @property
+    def trackerId(self):
+        """
+        ID of the tracker.
+
+        :rtype: str
+        """
+        if self._stone_trackerId_present:
+            return self._stone_trackerId_value
+        else:
+            raise AttributeError("missing required field 'trackerId'")
+
+    @trackerId.setter
+    def trackerId(self, val):
+        val = self._stone_trackerId_validator.validate(val)
+        self._stone_trackerId_value = val
+        self._stone_trackerId_present = True
+
+    @trackerId.deleter
+    def trackerId(self):
+        self._stone_trackerId_value = None
+        self._stone_trackerId_present = False
+
+    @property
+    def trackingNumber(self):
+        """
+        Bosta tracking number.
+
+        :rtype: str
+        """
+        if self._stone_trackingNumber_present:
+            return self._stone_trackingNumber_value
+        else:
+            raise AttributeError("missing required field 'trackingNumber'")
+
+    @trackingNumber.setter
+    def trackingNumber(self, val):
+        val = self._stone_trackingNumber_validator.validate(val)
+        self._stone_trackingNumber_value = val
+        self._stone_trackingNumber_present = True
+
+    @trackingNumber.deleter
+    def trackingNumber(self):
+        self._stone_trackingNumber_value = None
+        self._stone_trackingNumber_present = False
+
+    def __repr__(self):
+        return 'Tracker(trackerId={!r}, trackingNumber={!r})'.format(
+            self._stone_trackerId_value,
+            self._stone_trackingNumber_value,
+        )
+
+Tracker_validator = bv.Struct(Tracker)
+
 class Type(object):
     """
     Service type.
@@ -1945,6 +2200,7 @@ UpdateDeliveryResult_validator = bv.Struct(UpdateDeliveryResult)
 CreateDeliveryArg._stone_receiver_validator = Receiver_validator
 CreateDeliveryArg._stone_pickupAddress_validator = bv.Nullable(common.Address_validator)
 CreateDeliveryArg._stone_dropOffAddress_validator = bv.Nullable(common.Address_validator)
+CreateDeliveryArg._stone_returnAddress_validator = bv.Nullable(common.Address_validator)
 CreateDeliveryArg._stone_notes_validator = bv.Nullable(bv.String())
 CreateDeliveryArg._stone_cod_validator = bv.Nullable(bv.Float32())
 CreateDeliveryArg._stone_type_validator = bv.Int32()
@@ -1952,10 +2208,12 @@ CreateDeliveryArg._stone_isSameDay_validator = bv.Nullable(bv.Boolean())
 CreateDeliveryArg._stone_businessReference_validator = bv.Nullable(bv.String())
 CreateDeliveryArg._stone_subAccountId_validator = bv.Nullable(bv.String())
 CreateDeliveryArg._stone_webhookUrl_validator = bv.Nullable(bv.String())
+CreateDeliveryArg._stone_trackingNumber_validator = bv.Nullable(bv.String())
 CreateDeliveryArg._all_field_names_ = set([
     'receiver',
     'pickupAddress',
     'dropOffAddress',
+    'returnAddress',
     'notes',
     'cod',
     'type',
@@ -1963,11 +2221,13 @@ CreateDeliveryArg._all_field_names_ = set([
     'businessReference',
     'subAccountId',
     'webhookUrl',
+    'trackingNumber',
 ])
 CreateDeliveryArg._all_fields_ = [
     ('receiver', CreateDeliveryArg._stone_receiver_validator),
     ('pickupAddress', CreateDeliveryArg._stone_pickupAddress_validator),
     ('dropOffAddress', CreateDeliveryArg._stone_dropOffAddress_validator),
+    ('returnAddress', CreateDeliveryArg._stone_returnAddress_validator),
     ('notes', CreateDeliveryArg._stone_notes_validator),
     ('cod', CreateDeliveryArg._stone_cod_validator),
     ('type', CreateDeliveryArg._stone_type_validator),
@@ -1975,6 +2235,7 @@ CreateDeliveryArg._all_fields_ = [
     ('businessReference', CreateDeliveryArg._stone_businessReference_validator),
     ('subAccountId', CreateDeliveryArg._stone_subAccountId_validator),
     ('webhookUrl', CreateDeliveryArg._stone_webhookUrl_validator),
+    ('trackingNumber', CreateDeliveryArg._stone_trackingNumber_validator),
 ]
 
 CreateDeliveryResult._stone__id_validator = bv.String()
@@ -2012,6 +2273,7 @@ DeleteDeliveryResult._all_fields_ = [
 Delivery._stone__id_validator = bv.String()
 Delivery._stone_pickupAddress_validator = common.ResultAddress_validator
 Delivery._stone_dropOffAddress_validator = common.ResultAddress_validator
+Delivery._stone_returnAddress_validator = bv.Nullable(common.ResultAddress_validator)
 Delivery._stone_receiver_validator = Receiver_validator
 Delivery._stone_state_validator = State_validator
 Delivery._stone_trackingNumber_validator = bv.String()
@@ -2019,10 +2281,13 @@ Delivery._stone_notes_validator = bv.Nullable(bv.String())
 Delivery._stone_cod_validator = bv.Nullable(bv.Float32())
 Delivery._stone_businessReference_validator = bv.Nullable(bv.String())
 Delivery._stone_type_validator = bv.Nullable(Type_validator)
+Delivery._stone_createdAt_validator = bv.String()
+Delivery._stone_tracker_validator = bv.Nullable(Tracker_validator)
 Delivery._all_field_names_ = set([
     '_id',
     'pickupAddress',
     'dropOffAddress',
+    'returnAddress',
     'receiver',
     'state',
     'trackingNumber',
@@ -2030,11 +2295,14 @@ Delivery._all_field_names_ = set([
     'cod',
     'businessReference',
     'type',
+    'createdAt',
+    'tracker',
 ])
 Delivery._all_fields_ = [
     ('_id', Delivery._stone__id_validator),
     ('pickupAddress', Delivery._stone_pickupAddress_validator),
     ('dropOffAddress', Delivery._stone_dropOffAddress_validator),
+    ('returnAddress', Delivery._stone_returnAddress_validator),
     ('receiver', Delivery._stone_receiver_validator),
     ('state', Delivery._stone_state_validator),
     ('trackingNumber', Delivery._stone_trackingNumber_validator),
@@ -2042,6 +2310,8 @@ Delivery._all_fields_ = [
     ('cod', Delivery._stone_cod_validator),
     ('businessReference', Delivery._stone_businessReference_validator),
     ('type', Delivery._stone_type_validator),
+    ('createdAt', Delivery._stone_createdAt_validator),
+    ('tracker', Delivery._stone_tracker_validator),
 ]
 
 GetDeliveryArg._stone__id_validator = bv.String()
@@ -2093,6 +2363,17 @@ State._all_field_names_ = set([
 State._all_fields_ = [
     ('value', State._stone_value_validator),
     ('code', State._stone_code_validator),
+]
+
+Tracker._stone_trackerId_validator = bv.String()
+Tracker._stone_trackingNumber_validator = bv.String()
+Tracker._all_field_names_ = set([
+    'trackerId',
+    'trackingNumber',
+])
+Tracker._all_fields_ = [
+    ('trackerId', Tracker._stone_trackerId_validator),
+    ('trackingNumber', Tracker._stone_trackingNumber_validator),
 ]
 
 Type._stone_value_validator = bv.String()
