@@ -1,0 +1,13 @@
+# IDEs metadata
+.idea
+*.sublime-project
+*.sublime-workspace
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Python package metadata
+*.egg-info/
+/build/
+/dist/
